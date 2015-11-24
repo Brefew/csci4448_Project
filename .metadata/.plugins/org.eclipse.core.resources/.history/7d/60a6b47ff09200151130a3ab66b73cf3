@@ -1,0 +1,9 @@
+package lib;
+
+public class PowerUpHandler {
+	private PowerUp[] power_ups;
+	
+	public int[] getPowerUps() {
+		int[] ret = new int[this.power_ups.length]
+	}
+}

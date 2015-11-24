@@ -1,0 +1,26 @@
+package lib;
+
+public class Platform {
+	private int[] position;
+	private double[] velocity;
+	private int type;
+	private int status;
+	
+	public int[] getPosition() {
+		
+	}
+	public int getStatus() {
+		
+	}
+	private void setStatus(int new_status) {
+	
+	}
+	public int getType() {
+		
+	}
+	public void updatePlatforms() {
+		
+	}
+	
+
+}

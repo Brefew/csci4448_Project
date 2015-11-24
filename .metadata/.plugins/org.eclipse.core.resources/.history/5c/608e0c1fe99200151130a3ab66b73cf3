@@ -1,0 +1,25 @@
+package lib;
+
+import java.awt.event.MouseEvent;
+
+public class Display implements Observer {
+	public void setState(String state) {
+		
+	}
+	public void onKeyPressed(char c) {
+		
+	}
+	public void onMousePressed(MouseEvent e) {
+		
+	}
+	private void displayMenu(String menu) {
+		
+	}
+	private void displayGame() {
+		
+	}
+	private void updateGame(Player player, int score, int next_highest_score,
+			                int[] platforms, int power_ups, int[] enemies) {
+		
+	}
+}
