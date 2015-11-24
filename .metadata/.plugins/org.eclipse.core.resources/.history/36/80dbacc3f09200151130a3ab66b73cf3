@@ -1,0 +1,12 @@
+package lib;
+
+public class EnemyHandler {
+	private Enemy[] enemies;
+	
+	public int[] getEnemies() {
+		
+	}
+	public void updateEnemies(int[] player_position) {
+		
+	}
+}

@@ -1,0 +1,18 @@
+package lib;
+
+public class PlatformHandler {
+	private Platform[] platforms;
+	
+	public int[] getPlatforms() {
+		int[] ret;
+		for (int i=0; i<this.platforms.length; i++) {
+			int[] pos = platforms[i].getPosition();
+			int type = platforms[i].getType();
+			int status = platforms[i].getStatus();
+			int[] temp = {pos[0], pos[1], type, status};
+		}
+	}
+	public void updatePlatforms(int[] player_position) {
+		
+	}
+}
