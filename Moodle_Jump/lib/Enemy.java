@@ -1,10 +1,21 @@
 package lib;
 
 public class Enemy {
-	private int[] position;
 	private double[] velocity;
-	private int type;
+	private int[] position;
 	private int status;
+	private int type;
+	
+	public Enemy(int[] position, int type) {
+		this.position = position;
+		this.type = type;
+		
+		switch(type) {
+		case 0:
+			this.status = 1;
+			break;
+		}
+	}
 	
 	public int[] getPosition() {
 		return this.position;
@@ -18,7 +29,7 @@ public class Enemy {
 	public int getType() {
 		return this.type;
 	}
-	public void update(int player_position) {
+	public void update(int[] player_position) {
 		
 	}
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<workbench progressCount="14" version="2.0">
+<workbench progressCount="20" version="2.0">
 <workbenchAdvisor/>
 <window height="766" maximized="true" width="1012" x="318" y="178">
 <fastViewData fastViewLocation="1024"/>
@@ -34,39 +34,39 @@
 <part id="2"/>
 <part id="3"/>
 <part id="4"/>
-<part id="5"/>
 <part id="6"/>
+<part id="5"/>
 </presentation>
 </folder>
 </info>
 </editorArea>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PowerUp.java" partName="PowerUp.java" path="/home/sam/csci4448_Project/Moodle_Jump/lib/PowerUp.java" title="PowerUp.java" tooltip="Moodle_Jump/lib/PowerUp.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Moodle_Jump/lib/PowerUp.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="241" selectionTopPixel="0"/>
-</editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PowerUpHandler.java" partName="PowerUpHandler.java" path="/home/sam/csci4448_Project/Moodle_Jump/lib/PowerUpHandler.java" title="PowerUpHandler.java" tooltip="Moodle_Jump/lib/PowerUpHandler.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Moodle_Jump/lib/PowerUpHandler.java"/>
 <editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="374" selectionTopPixel="0"/>
 </editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="EnemyHandler.java" partName="EnemyHandler.java" path="/home/sam/csci4448_Project/Moodle_Jump/lib/EnemyHandler.java" title="EnemyHandler.java" tooltip="Moodle_Jump/lib/EnemyHandler.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Moodle_Jump/lib/EnemyHandler.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="483" selectionTopPixel="0"/>
-</editor>
-<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="LevelGenerator.java" partName="LevelGenerator.java" path="/home/sam/csci4448_Project/Moodle_Jump/lib/LevelGenerator.java" title="LevelGenerator.java" tooltip="Moodle_Jump/lib/LevelGenerator.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Moodle_Jump/lib/LevelGenerator.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="356" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="736" selectionTopPixel="0"/>
 </editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PlatformHandler.java" partName="PlatformHandler.java" path="/home/sam/csci4448_Project/Moodle_Jump/lib/PlatformHandler.java" title="PlatformHandler.java" tooltip="Moodle_Jump/lib/PlatformHandler.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Moodle_Jump/lib/PlatformHandler.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="0" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="2013" selectionTopPixel="1079"/>
+</editor>
+<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="LevelGenerator.java" partName="LevelGenerator.java" path="/home/sam/csci4448_Project/Moodle_Jump/lib/LevelGenerator.java" title="LevelGenerator.java" tooltip="Moodle_Jump/lib/LevelGenerator.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Moodle_Jump/lib/LevelGenerator.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="772" selectionTopPixel="0"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Platform.java" partName="Platform.java" path="/home/sam/csci4448_Project/Moodle_Jump/lib/Platform.java" title="Platform.java" tooltip="Moodle_Jump/lib/Platform.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Moodle_Jump/lib/Platform.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="856" selectionTopPixel="44"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GameEngine.java" partName="GameEngine.java" path="/home/sam/csci4448_Project/Moodle_Jump/lib/GameEngine.java" title="GameEngine.java" tooltip="Moodle_Jump/lib/GameEngine.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Moodle_Jump/lib/GameEngine.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="280" selectionTopPixel="0"/>
 </editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Enemy.java" partName="Enemy.java" path="/home/sam/csci4448_Project/Moodle_Jump/lib/Enemy.java" title="Enemy.java" tooltip="Moodle_Jump/lib/Enemy.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Moodle_Jump/lib/Enemy.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="407" selectionTopPixel="0"/>
-</editor>
-<editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="DataReader.java" partName="DataReader.java" path="/home/sam/csci4448_Project/Moodle_Jump/lib/DataReader.java" title="DataReader.java" tooltip="Moodle_Jump/lib/DataReader.java" workbook="DefaultEditorWorkbook">
-<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/Moodle_Jump/lib/DataReader.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="448" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="560" selectionTopPixel="0"/>
 </editor>
 </editors>
 <views>
@@ -104,6 +104,7 @@
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
 <expanded>
 <category IMemento.internal.id="Errors"/>
+<category IMemento.internal.id="Warnings (22 items)"/>
 <category IMemento.internal.id="Warnings"/>
 </expanded>
 <columnWidths org.eclipse.ui.ide.locationField="105" org.eclipse.ui.ide.markerType="886" org.eclipse.ui.ide.pathField="140" org.eclipse.ui.ide.resourceField="105" org.eclipse.ui.ide.severityAndDescriptionField="350"/>
@@ -310,165 +311,160 @@
 <navigationHistory>
 <editors>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Moodle_Jump/lib/PlatformHandler.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Moodle_Jump/lib/Player.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Moodle_Jump/lib/PowerUp.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Moodle_Jump/lib/Player.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Moodle_Jump/lib/PowerUpHandler.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Moodle_Jump/lib/PlatformHandler.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Moodle_Jump/lib/EnemyHandler.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Moodle_Jump/lib/LevelGenerator.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Moodle_Jump/lib/EnemyHandler.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Moodle_Jump/lib/Enemy.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Moodle_Jump/lib/DataReader.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/Moodle_Jump/lib/Platform.java"/>
 </editors>
-<item historyLabel="PlatformHandler.java" index="0">
-<position info="not_deleted" x="439" y="0"/>
+<item historyLabel="Enemy.java" index="3">
+<position info="not_deleted" x="286" y="0"/>
+</item>
+<item historyLabel="Platform.java" index="4">
+<position info="not_deleted" x="595" y="0"/>
+</item>
+<item historyLabel="Enemy.java" index="3">
+<position info="not_deleted" x="286" y="0"/>
+</item>
+<item historyLabel="Enemy.java" index="3">
+<position info="not_deleted" x="283" y="0"/>
+</item>
+<item historyLabel="Platform.java" index="4">
+<position info="not_deleted" x="595" y="0"/>
+</item>
+<item historyLabel="Enemy.java" index="3">
+<position info="not_deleted" x="283" y="0"/>
+</item>
+<item historyLabel="Enemy.java" index="3">
+<position info="not_deleted" x="283" y="0"/>
+</item>
+<item historyLabel="EnemyHandler.java" index="2">
+<position info="not_deleted" x="1089" y="0"/>
+</item>
+<item historyLabel="EnemyHandler.java" index="2">
+<position info="not_deleted" x="650" y="0"/>
+</item>
+<item historyLabel="EnemyHandler.java" index="2">
+<position info="not_deleted" x="994" y="0"/>
+</item>
+<item historyLabel="EnemyHandler.java" index="2">
+<position info="not_deleted" x="1045" y="0"/>
+</item>
+<item historyLabel="EnemyHandler.java" index="2">
+<position info="not_deleted" x="1131" y="0"/>
 </item>
 <item historyLabel="PlatformHandler.java" index="0">
-<position info="not_deleted" x="111" y="3"/>
+<position info="not_deleted" x="1328" y="0"/>
+</item>
+<item historyLabel="EnemyHandler.java" index="2">
+<position info="not_deleted" x="1125" y="0"/>
 </item>
 <item historyLabel="PlatformHandler.java" index="0">
-<position info="not_deleted" x="442" y="0"/>
+<position info="not_deleted" x="249" y="0"/>
 </item>
-<item historyLabel="Player.java" index="1">
-<position info="not_deleted" x="288" y="0"/>
+<item historyLabel="EnemyHandler.java" index="2">
+<position info="not_deleted" x="1125" y="0"/>
 </item>
-<item historyLabel="PowerUp.java" index="2">
-<position info="not_deleted" x="0" y="0"/>
+<item historyLabel="EnemyHandler.java" index="2">
+<position info="not_deleted" x="966" y="0"/>
 </item>
-<item historyLabel="Player.java" index="3">
-<position info="not_deleted" x="0" y="0"/>
+<item historyLabel="LevelGenerator.java" index="1">
+<position info="not_deleted" x="382" y="0"/>
 </item>
-<item historyLabel="Player.java" index="3">
-<position info="not_deleted" x="137" y="0"/>
+<item historyLabel="Platform.java" index="4">
+<position info="not_deleted" x="595" y="0"/>
 </item>
-<item historyLabel="Player.java" index="3">
-<position info="not_deleted" x="102" y="8"/>
+<item historyLabel="PlatformHandler.java" index="0">
+<position info="not_deleted" x="249" y="0"/>
 </item>
-<item historyLabel="Player.java" index="3">
-<position info="not_deleted" x="165" y="0"/>
+<item historyLabel="EnemyHandler.java" index="2">
+<position info="not_deleted" x="2925" y="0"/>
 </item>
-<item historyLabel="Player.java" index="3">
-<position info="not_deleted" x="84" y="6"/>
+<item historyLabel="PlatformHandler.java" index="0">
+<position info="not_deleted" x="249" y="0"/>
 </item>
-<item historyLabel="PowerUp.java" index="2">
-<position info="not_deleted" x="0" y="0"/>
+<item historyLabel="EnemyHandler.java" index="2">
+<position info="not_deleted" x="2925" y="0"/>
 </item>
-<item historyLabel="PowerUp.java" index="2">
-<position info="not_deleted" x="50" y="0"/>
+<item historyLabel="PlatformHandler.java" index="0">
+<position info="not_deleted" x="1804" y="0"/>
 </item>
-<item historyLabel="PowerUp.java" index="2">
-<position info="not_deleted" x="78" y="0"/>
+<item historyLabel="EnemyHandler.java" index="2">
+<position info="not_deleted" x="2925" y="0"/>
 </item>
-<item historyLabel="PowerUp.java" index="2">
-<position info="not_deleted" x="123" y="0"/>
+<item historyLabel="EnemyHandler.java" index="2">
+<position info="not_deleted" x="1615" y="0"/>
 </item>
-<item historyLabel="PowerUp.java" index="2">
-<position info="not_deleted" x="137" y="0"/>
-</item>
-<item historyLabel="PowerUp.java" index="2">
+<item historyLabel="EnemyHandler.java" index="2">
 <position/>
 </item>
-<item historyLabel="PowerUp.java" index="2">
-<position info="not_deleted" x="188" y="0"/>
-</item>
-<item historyLabel="PowerUp.java" index="2">
-<position info="not_deleted" x="241" y="0"/>
-</item>
-<item historyLabel="PowerUpHandler.java" index="4">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="PowerUpHandler.java" index="4">
-<position info="not_deleted" x="102" y="0"/>
-</item>
-<item historyLabel="PowerUpHandler.java" index="4">
-<position info="not_deleted" x="112" y="0"/>
-</item>
-<item historyLabel="PowerUpHandler.java" index="4">
-<position info="not_deleted" x="233" y="0"/>
-</item>
-<item historyLabel="PowerUpHandler.java" index="4">
-<position info="not_deleted" x="247" y="0"/>
-</item>
-<item historyLabel="PowerUpHandler.java" index="4">
-<position info="not_deleted" x="271" y="0"/>
-</item>
-<item historyLabel="PowerUpHandler.java" index="4">
-<position info="not_deleted" x="295" y="0"/>
-</item>
-<item historyLabel="PowerUpHandler.java" index="4">
-<position info="not_deleted" x="374" y="0"/>
-</item>
-<item historyLabel="PlatformHandler.java" index="5">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="EnemyHandler.java" index="6">
-<position info="not_deleted" x="419" y="0"/>
-</item>
-<item historyLabel="PlatformHandler.java" index="5">
-<position info="not_deleted" x="111" y="328"/>
-</item>
-<item historyLabel="EnemyHandler.java" index="6">
-<position info="not_deleted" x="483" y="0"/>
-</item>
-<item historyLabel="LevelGenerator.java" index="7">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="PlatformHandler.java" index="5">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="LevelGenerator.java" index="7">
-<position info="not_deleted" x="356" y="0"/>
-</item>
-<item historyLabel="Enemy.java" index="8">
-<position info="not_deleted" x="407" y="0"/>
-</item>
-<item historyLabel="DataReader.java" index="9">
-<position info="not_deleted" x="0" y="0"/>
-</item>
-<item historyLabel="DataReader.java" index="9">
+<item historyLabel="EnemyHandler.java" index="2">
 <position/>
 </item>
-<item historyLabel="DataReader.java" index="9">
-<position info="not_deleted" x="448" y="0"/>
+<item historyLabel="EnemyHandler.java" index="2">
+<position info="not_deleted" x="2382" y="0"/>
 </item>
-<item historyLabel="DataReader.java" index="9">
+<item historyLabel="EnemyHandler.java" index="2">
 <position/>
 </item>
-<item historyLabel="DataReader.java" index="9">
+<item historyLabel="EnemyHandler.java" index="2">
+<position info="not_deleted" x="1638" y="0"/>
+</item>
+<item historyLabel="EnemyHandler.java" index="2">
 <position/>
 </item>
-<item historyLabel="DataReader.java" index="9">
+<item historyLabel="EnemyHandler.java" index="2">
 <position/>
 </item>
-<item historyLabel="DataReader.java" index="9">
+<item historyLabel="EnemyHandler.java" index="2">
 <position/>
 </item>
-<item historyLabel="DataReader.java" index="9">
+<item historyLabel="Enemy.java" index="3">
+<position info="not_deleted" x="560" y="0"/>
+</item>
+<item historyLabel="EnemyHandler.java" index="2">
 <position/>
 </item>
-<item historyLabel="DataReader.java" index="9">
-<position/>
+<item historyLabel="EnemyHandler.java" index="2">
+<position info="not_deleted" x="2925" y="0"/>
 </item>
-<item historyLabel="DataReader.java" index="9">
-<position/>
+<item historyLabel="PlatformHandler.java" index="0">
+<position info="not_deleted" x="1804" y="0"/>
 </item>
-<item historyLabel="DataReader.java" index="9">
-<position/>
+<item historyLabel="PlatformHandler.java" index="0">
+<position info="not_deleted" x="1898" y="0"/>
 </item>
-<item historyLabel="DataReader.java" index="9">
-<position/>
+<item historyLabel="PlatformHandler.java" index="0">
+<position info="not_deleted" x="1792" y="0"/>
 </item>
-<item historyLabel="DataReader.java" index="9">
-<position/>
+<item historyLabel="PlatformHandler.java" index="0">
+<position info="not_deleted" x="3174" y="0"/>
 </item>
-<item historyLabel="DataReader.java" index="9">
-<position/>
+<item historyLabel="Platform.java" index="4">
+<position info="not_deleted" x="856" y="0"/>
 </item>
-<item historyLabel="DataReader.java" index="9">
-<position/>
+<item historyLabel="PlatformHandler.java" index="0">
+<position info="not_deleted" x="3180" y="0"/>
 </item>
-<item active="true" historyLabel="DataReader.java" index="9">
-<position/>
+<item historyLabel="EnemyHandler.java" index="2">
+<position info="not_deleted" x="2925" y="0"/>
+</item>
+<item historyLabel="PlatformHandler.java" index="0">
+<position info="not_deleted" x="3180" y="0"/>
+</item>
+<item historyLabel="PlatformHandler.java" index="0">
+<position info="not_deleted" x="2013" y="0"/>
+</item>
+<item historyLabel="EnemyHandler.java" index="2">
+<position info="not_deleted" x="1855" y="0"/>
+</item>
+<item historyLabel="PlatformHandler.java" index="0">
+<position info="not_deleted" x="2013" y="0"/>
+</item>
+<item historyLabel="EnemyHandler.java" index="2">
+<position info="not_deleted" x="736" y="0"/>
+</item>
+<item active="true" historyLabel="LevelGenerator.java" index="1">
+<position info="not_deleted" x="382" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -487,17 +483,23 @@
 </trimLayout>
 </window>
 <mruList>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="DataReader.java" tooltip="Moodle_Jump/lib/DataReader.java">
-<persistable path="/Moodle_Jump/lib/DataReader.java"/>
-</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Enemy.java" tooltip="Moodle_Jump/lib/Enemy.java">
 <persistable path="/Moodle_Jump/lib/Enemy.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GameEngine.java" tooltip="Moodle_Jump/lib/GameEngine.java">
+<persistable path="/Moodle_Jump/lib/GameEngine.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Platform.java" tooltip="Moodle_Jump/lib/Platform.java">
+<persistable path="/Moodle_Jump/lib/Platform.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="LevelGenerator.java" tooltip="Moodle_Jump/lib/LevelGenerator.java">
+<persistable path="/Moodle_Jump/lib/LevelGenerator.java"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PlatformHandler.java" tooltip="Moodle_Jump/lib/PlatformHandler.java">
 <persistable path="/Moodle_Jump/lib/PlatformHandler.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="LevelGenerator.java" tooltip="Moodle_Jump/lib/LevelGenerator.java">
-<persistable path="/Moodle_Jump/lib/LevelGenerator.java"/>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="DataReader.java" tooltip="Moodle_Jump/lib/DataReader.java">
+<persistable path="/Moodle_Jump/lib/DataReader.java"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="EnemyHandler.java" tooltip="Moodle_Jump/lib/EnemyHandler.java">
 <persistable path="/Moodle_Jump/lib/EnemyHandler.java"/>
@@ -511,17 +513,11 @@
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="PowerUp.java" tooltip="Moodle_Jump/lib/PowerUp.java">
 <persistable path="/Moodle_Jump/lib/PowerUp.java"/>
 </file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Platform.java" tooltip="Moodle_Jump/lib/Platform.java">
-<persistable path="/Moodle_Jump/lib/Platform.java"/>
-</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Display.java" tooltip="Moodle_Jump/lib/Display.java">
 <persistable path="/Moodle_Jump/lib/Display.java"/>
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="InputListener.java" tooltip="Moodle_Jump/lib/InputListener.java">
 <persistable path="/Moodle_Jump/lib/InputListener.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="GameEngine.java" tooltip="Moodle_Jump/lib/GameEngine.java">
-<persistable path="/Moodle_Jump/lib/GameEngine.java"/>
 </file>
 </mruList>
 </workbench>
