@@ -65,8 +65,8 @@ public class PlatformHandler {
 		return ret;
 	}
 	public void updatePlatforms(int player_y, int[] indices_of_affected_platforms) {
-		// Hoping for now that changes to array objects affect the same objects in the queue
 		Platform[] platforms = (Platform[]) this.platforms.toArray();
+		this.platforms.clear();
 		for (int i=0; i<platforms.length; i++) {
 			boolean affected = false;
 			for (int j=0; j<indices_of_affected_platforms.length; j++) {
@@ -76,6 +76,10 @@ public class PlatformHandler {
 				}
 			}
 			platforms[i].update(affected);
+			// Don't add destroyed platforms
+			if (platforms[i].getType() != 0 && platforms[i].getStatus() != 0) {
+				this.platforms.add(platforms[i]);
+			}
 		}
 		
 		if (this.last_y-player_y <= this.generate_distance) {

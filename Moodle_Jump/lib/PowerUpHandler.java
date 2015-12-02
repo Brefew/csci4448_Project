@@ -53,10 +53,10 @@ public class PowerUpHandler {
 		int[] type_list;
 		int player_y = player_position[1];
 		
+		if (this.power_ups.size() >= this.max_number) {
+			this.power_ups.remove();
+		}
 		if (last_y-player_y <= this.generate_distance) {
-			if (this.power_ups.size() >= this.max_number) {
-				this.power_ups.remove();
-			}
 			// This switch basically checks which multiple of the difficulty modifier the player is at.
 			//   If this.difficulty = 1000, then player_y/this.difficulty will be 0 if the player is
 			//     below 1000, 1 if the player is below 2000, and so on.  The default just catches anything
