@@ -4,20 +4,13 @@ public class LevelGenerator {
 	private PlatformHandler platform_handler;
 	private PowerUpHandler power_up_handler;
 	private EnemyHandler enemy_handler;
-	
-<<<<<<< HEAD
-	public LevelGenerator() {
-		this.platform_handler = new PlatformHandler();
-		this.power_up_handler = new PowerUpHandler();
-		this.enemy_handler = new EnemyHandler();
-=======
-	public LevelGenerator(long seed, int max_platform_number, int max_power_up_number, int max_enemy_number, int max_display_width, int max_display_height) {
+
+	public LevelGenerator(long seed, int max_platform_number, int max_power_up_number, int max_enemy_number, int max_display_width, int max_display_height, int difficulty_modifier) {
 		int[][] platforms;
 		this.platform_handler = new PlatformHandler(seed, max_platform_number, max_display_width, difficulty_modifier);
 		platforms = this.platform_handler.getPlatforms();
 		this.power_up_handler = new PowerUpHandler(seed, max_power_up_number, difficulty_modifier, platforms);
 		this.enemy_handler = new EnemyHandler(seed, max_enemy_number, difficulty_modifier, platforms);
->>>>>>> 486deb4fc4ef7bde4b80217e638b1d9cbd315587
 		this.createLevel();
 	}
 	public void update(int[] player_position) {

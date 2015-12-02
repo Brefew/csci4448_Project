@@ -1,20 +1,19 @@
 package lib;
 
+import java.util.Queue;
+import java.util.Random;
+
 public class EnemyHandler {
-	private Enemy[] enemies;
+	private Queue<Enemy> enemies;
+	private int max_number;
+	private int last_y = 0;
+	private int enemy_width = 32;
+	private int enemy_height = 32;
+	private int initial_enemy_separation = 1024;
+	private int generate_distance = 2056;
+	private int difficulty;
+	private Random generator;
 	
-<<<<<<< HEAD
-	public int[] getEnemies() {
-		int[] ret = new int[this.enemies.length*4];
-		for (int i=0; i<this.enemies.length; i++) {
-			int[] pos = enemies[i].getPosition();
-			int type = enemies[i].getType();
-			int status = enemies[i].getStatus();
-			ret[4*i+0] = pos[0];
-			ret[4*i+1] = pos[1];
-			ret[4*i+2] = type;
-			ret[4*i+3] = status;
-=======
 	public EnemyHandler(long seed, int max_enemy_number, int difficulty, int[][] platforms) {
 		int i;
 		int j=0;
@@ -45,7 +44,6 @@ public class EnemyHandler {
 			ret[i][1] = pos[1];
 			ret[i][2] = type;
 			ret[i][3] = status;
->>>>>>> 486deb4fc4ef7bde4b80217e638b1d9cbd315587
 		}
 		return ret;
 	}

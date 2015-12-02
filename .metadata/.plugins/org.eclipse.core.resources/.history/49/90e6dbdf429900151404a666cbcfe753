@@ -1,0 +1,72 @@
+package lib;
+
+import java.util.Queue;
+import java.util.Random;
+
+public class PlatformHandler {
+	private Queue<Platform> platforms;
+	private int max_number;
+	private int last_x = 0;
+	private int last_y = 0;
+	private int platform_width = 32;
+	private int platform_height = 32;
+	private int initial_platform_separation = 128;
+	private int generate_distance = 2056;
+	private int display_width;
+	private int difficulty;
+	private Random generator;
+	
+	public PlatformHandler(long seed, int max_platform_number, int max_display_width, int difficulty) {
+		int[] position;
+		int i;
+		int j=0;
+		int x = 0;
+		int y = 0+this.platform_height;
+		this.last_x = x;
+		this.last_y = y;
+		this.generator = new Random(seed);
+		this.max_number = max_platform_number;
+		this.display_width = max_display_width;
+		this.difficulty = difficulty;
+		
+		// Generate initial platforms
+		for (i=0; i<this.max_number; i++) {
+			x = this.generator.nextInt(this.display_width-this.platform_width);
+			if (i%2 == 0) {
+				y = i/2*this.initial_platform_separation;
+			} else {
+				if (x < this.last_x+this.platform_width && x > this.last_x) {
+					if (this.last_x-this.platform_width > 0) {
+						x = this.last_x-this.platform_width;
+					} else {
+						x = this.last_x+this.platform_width;
+					}
+				}
+				y = last_y;
+			}
+			position[0] = x;
+			position[1] = y;
+			this.platforms.add(new Platform(position, 0, 0, this.platform_height, this.platform_width));
+			
+			this.last_x = x;
+			this.last_y = y;
+		}
+	}
+	public int[][] getPlatforms() {
+		int[][] ret = new int[this.platforms.size()][4];
+		Platform temp_array[] = (Platform[]) this.platforms.toArray();
+		for (int i=0; i<temp_array.length; i++) {
+			int[] pos = temp_array[i].getPosition();
+			int type = temp_array[i].getType();
+			int status = temp_array[i].getStatus();
+			ret[i][0] = pos[0];
+			ret[i][1] = pos[1];
+			ret[i][2] = type;
+			ret[i][3] = status;
+		}
+		return ret;
+	}
+	public void updatePlatforms(int[] player_position) {
+		
+	}
+}
