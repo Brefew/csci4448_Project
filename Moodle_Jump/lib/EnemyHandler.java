@@ -14,11 +14,9 @@ public class EnemyHandler {
 	private int difficulty;
 	private Random generator;
 	
-	public EnemyHandler(long seed, int max_enemy_number, int difficulty, int[] platforms) {
+	public EnemyHandler(long seed, int max_enemy_number, int difficulty, int[][] platforms) {
 		int i;
-		// Starting j at one for the nested for loop below because that is the y for the first platform,
-		//   and j+=4 to get the y from every platform after that
-		int j=1;
+		int j=0;
 		int[] position;
 		this.generator = new Random(seed);
 		this.max_number = max_enemy_number;
@@ -27,25 +25,25 @@ public class EnemyHandler {
 		// Generate initial enemies
 		for (i=0; i<this.max_number; i++) {
 			for (; j<platforms.length; j+=4) {
-				if (platforms[j]-this.last_y >= this.initial_enemy_separation && platforms[j+1] == 0) {
-					position = new int[] {platforms[j-1], this.enemy_height+platforms[j]};
+				if (platforms[j][1]-this.last_y >= this.initial_enemy_separation && platforms[j][2] == 0) {
+					position = new int[] {platforms[j][0], this.enemy_height+platforms[j][1]};
 					this.enemies.add(new Enemy(position, 0));
-					this.last_y = platforms[j];
+					this.last_y = platforms[j][1];
 				}
 			}
 		}
 	}
-	public int[] getEnemies() {
-		int[] ret = new int[this.enemies.size()*4];
+	public int[][] getEnemies() {
+		int[][] ret = new int[this.enemies.size()][4];
 		Enemy temp_array[] = (Enemy[]) this.enemies.toArray();
 		for (int i=0; i<temp_array.length; i++) {
 			int[] pos = temp_array[i].getPosition();
 			int type = temp_array[i].getType();
 			int status = temp_array[i].getStatus();
-			ret[4*i+0] = pos[0];
-			ret[4*i+1] = pos[1];
-			ret[4*i+2] = type;
-			ret[4*i+3] = status;
+			ret[i][0] = pos[0];
+			ret[i][1] = pos[1];
+			ret[i][2] = type;
+			ret[i][3] = status;
 		}
 		return ret;
 	}

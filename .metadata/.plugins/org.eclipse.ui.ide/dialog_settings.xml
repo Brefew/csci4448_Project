@@ -5,4 +5,8 @@
 		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
 		</list>
 	</section>
+	<section name="ChooseWorkspaceDialogSettings">
+		<item value="612" key="DIALOG_X_ORIGIN"/>
+		<item value="263" key="DIALOG_Y_ORIGIN"/>
+	</section>
 </section>

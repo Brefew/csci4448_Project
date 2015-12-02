@@ -8,6 +8,8 @@ public class Player implements Observer {
 	private double[] velocity;
 	private int state;
 	private String name;
+	private int player_height = 32;
+	private int player_width = 32;
 	
 	public int[] getPosition() {
 		return this.position;
@@ -17,6 +19,12 @@ public class Player implements Observer {
 	}
 	public String getName() {
 		return this.name;
+	}
+	public int getPlayerHeight() {
+		return this.player_height;
+	}
+	public int getPlayerWidth() {
+		return this.player_width;
 	}
 	public void onKeyPressed(char c) {
 		

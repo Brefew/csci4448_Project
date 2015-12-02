@@ -44,17 +44,17 @@ public class PlatformHandler {
 		}
 	}
 	
-	public int[] getPlatforms() {
-		int[] ret = new int[this.platforms.size()*4];
+	public int[][] getPlatforms() {
+		int[][] ret = new int[this.platforms.size()][4];
 		Platform temp_array[] = (Platform[]) this.platforms.toArray();
 		for (int i=0; i<temp_array.length; i++) {
 			int[] pos = temp_array[i].getPosition();
 			int type = temp_array[i].getType();
 			int status = temp_array[i].getStatus();
-			ret[4*i+0] = pos[0];
-			ret[4*i+1] = pos[1];
-			ret[4*i+2] = type;
-			ret[4*i+3] = status;
+			ret[i][0] = pos[0];
+			ret[i][1] = pos[1];
+			ret[i][2] = type;
+			ret[i][3] = status;
 		}
 		return ret;
 	}
