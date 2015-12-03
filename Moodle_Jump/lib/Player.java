@@ -4,7 +4,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 public class Player implements Observer {
-	private int[] position;
+	private double[] position;
 	private double[] velocity;
 	private int state;
 	private String name;
@@ -12,7 +12,10 @@ public class Player implements Observer {
 	private int player_width = 32;
 	
 	public int[] getPosition() {
-		return this.position;
+		return new int[] {(int) this.position[0], (int) this.position[1]};
+	}
+	public void setPosition(int x, int y) {
+		this.position = new double[] {(double) x, (double) y};
 	}
 	public int getState() {
 		return this.state;

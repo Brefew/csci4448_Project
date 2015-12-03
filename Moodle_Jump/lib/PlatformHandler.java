@@ -122,11 +122,17 @@ public class PlatformHandler {
 					case 1: status = 1;
 						break;
 				}
-				this.platforms.add(new Platform(position, status, type, this.platform_height, this.platform_width, this.display_width));
+				this.platforms.add(new Platform(position, type, status, this.platform_height, this.platform_width, this.display_width));
 				
 				this.last_x = x;
 				this.last_y = y;
 			}
 		}
+	}
+	public int getPlatformHeight() {
+		return this.platform_height;
+	}
+	public int getPlatformWidth() {
+		return this.platform_width;
 	}
 }

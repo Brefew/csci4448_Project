@@ -93,7 +93,7 @@ public class EnemyHandler {
 							case 1: status = 2;
 						}
 						position = new int[] {platforms[j][0], this.enemy_height+platforms[j][1]};
-						this.enemies.add(new Enemy(position, status, type, enemy_height, enemy_width));
+						this.enemies.add(new Enemy(position, type, status, enemy_height, enemy_width));
 						this.last_y = platforms[j][1];
 					}
 				}

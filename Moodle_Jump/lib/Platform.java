@@ -9,10 +9,10 @@ public class Platform {
 	private int width;
 	private int display_width;
 	
-	public Platform(int[] position, int status, int type, int height, int width, int display_width) {
+	public Platform(int[] position, int type, int status, int height, int width, int display_width) {
 		this.position = new double[] {position[0], position[1]};
-		this.status = status;
 		this.type = type;
+		this.status = status;
 		this.height = height;
 		this.width = width;
 		this.display_width = display_width;

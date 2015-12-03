@@ -15,8 +15,7 @@ public class PowerUpHandler {
 	private Random generator;
 	
 	public PowerUpHandler(long seed, int max_power_up_number, int difficulty, int[][] platforms) {
-		int i;
-		int j=0;
+		int i, j=0;
 		int[] position;
 		this.generator = new Random(seed);
 		this.max_number = max_power_up_number;
@@ -41,17 +40,31 @@ public class PowerUpHandler {
 			ret[i][0] = pos[0];
 			ret[i][1] = pos[1];
 			ret[i][2] = temp_array[i].getType();
-			ret[i][3] = 0;
+			ret[i][3] = temp_array[i].getStatus();
 		}
 		return ret;
 	}
-	public void updatePowerUps(int[] player_position, int[] platforms) {
-		PowerUp[] power_ups;
+	public void updatePowerUps(int player_y, int[] indices_of_affected_power_ups, int[][] platforms) {
 		int type;
-		int j = 1;
+		int i, j = 0;
 		int[] position;
 		int[] type_list;
-		int player_y = player_position[1];
+		PowerUp[] power_ups = (PowerUp[]) this.power_ups.toArray();
+		this.power_ups.clear();
+		for (i=0; i<power_ups.length; i++) {
+			boolean affected = false;
+			for (; j<indices_of_affected_power_ups.length; j++) {
+				if (i == indices_of_affected_power_ups[j]) {
+					affected = true;
+					break;
+				}
+			}
+			power_ups[i].update(affected);
+			// Don't add used power ups
+			if (power_ups[i].getStatus() != 0) {
+				this.power_ups.add(power_ups[i]);
+			}
+		}
 		
 		if (this.power_ups.size() >= this.max_number) {
 			this.power_ups.remove();
@@ -68,21 +81,16 @@ public class PowerUpHandler {
 					break;
 			}
 			
-			for (int i=this.power_ups.size(); i<this.max_number; i++) {
-				for (; j<platforms.length; j+=4) {
-					if (platforms[j]-this.last_y >= this.initial_power_up_separation && platforms[j+1] == 0) {
-						position = new int[] {platforms[j-1], this.power_up_height+platforms[j]};
+			for (i=this.power_ups.size(); i<this.max_number; i++) {
+				for (; j<platforms.length; j++) {
+					if (platforms[j][1]-this.last_y >= this.initial_power_up_separation && platforms[j][2] == 0) {
+						position = new int[] {platforms[j][0], this.power_up_height+platforms[j][1]};
 						type = type_list[this.generator.nextInt(type_list.length)];
 						this.power_ups.add(new PowerUp(position, type));
-						this.last_y = platforms[j];
+						this.last_y = platforms[j][1];
 					}
 				}
 			}
-		}
-		
-		power_ups = (PowerUp[]) this.power_ups.toArray();
-		for (int i=0; i<power_ups.length; i++) {
-			power_ups[i].update();
 		}
 	}
 }

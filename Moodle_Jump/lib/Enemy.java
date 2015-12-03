@@ -8,10 +8,10 @@ public class Enemy {
 	private int height;
 	private int width;
 	
-	public Enemy(int[] position, int status, int type, int height, int width) {
+	public Enemy(int[] position, int type, int status, int height, int width) {
 		this.position = new double[] {(double) position[0], (double) position[1]};
-		this.status = status;
 		this.type = type;
+		this.status = status;
 		this.height = height;
 		this.width = width;
 	}
