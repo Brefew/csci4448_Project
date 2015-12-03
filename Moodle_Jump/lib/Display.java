@@ -17,9 +17,8 @@ import javax.swing.JFrame;
 public class Display extends Canvas implements Runnable, Observer {
     
     private static final long serialVersionUID = 1L;
-    
-    public static final int WIDTH = 600;
-    public static final int HEIGHT = 800;
+    private static int height;
+    private static int width;
     //public static final int SCALE = 3;
     public static final String NAME = "Moodle Jump";
 
@@ -33,8 +32,10 @@ public class Display extends Canvas implements Runnable, Observer {
     private BufferedImage image = new BufferedImage(WIDTH,HEIGHT,BufferedImage.TYPE_INT_RGB);
     private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
     
-    public Display(){
-        setPreferredSize(new Dimension(WIDTH/2,HEIGHT));
+    public Display(int display_height, int display_width){
+    	height = display_height;
+    	width  = display_width;
+        setPreferredSize(new Dimension(width/2,height));
         
         frame = new JFrame(NAME);
         frame.setLayout(new BorderLayout());

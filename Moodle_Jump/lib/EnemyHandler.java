@@ -100,4 +100,10 @@ public class EnemyHandler {
 			}
 		}
 	}
+	public int getEnemyHeight() {
+		return this.enemy_height;
+	}
+	public int getEnemyWidth() {
+		return this.enemy_width;
+	}
 }

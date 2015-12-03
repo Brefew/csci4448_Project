@@ -93,4 +93,10 @@ public class PowerUpHandler {
 			}
 		}
 	}
+	public int getPowerUpHeight() {
+		return this.power_up_height;
+	}
+	public int getPowerUpWidth() {
+		return this.power_up_width;
+	}
 }

@@ -28,4 +28,18 @@ public class LevelGenerator {
 	public int[][] getEnemies() {
 		return this.enemy_handler.getEnemies();
 	}
+	public int[][] getHeightsAndWidths() {
+		int[][] heights_and_widths;
+		int[] platform_height_and_width;
+		int[] power_up_height_and_width;
+		int[] enemy_height_and_width;
+		
+		platform_height_and_width = new int[] {this.platform_handler.getPlatformHeight(), this.platform_handler.getPlatformWidth()};
+		power_up_height_and_width = new int[] {this.power_up_handler.getPowerUpHeight(), this.power_up_handler.getPowerUpWidth()};
+		enemy_height_and_width    = new int[] {this.enemy_handler.getEnemyHeight(), this.enemy_handler.getEnemyWidth()};
+		heights_and_widths = new int[][] {platform_height_and_width,
+				                          power_up_height_and_width,
+				                          enemy_height_and_width};
+		return heights_and_widths;
+	}
 }

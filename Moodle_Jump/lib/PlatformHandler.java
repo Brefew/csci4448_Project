@@ -9,13 +9,13 @@ public class PlatformHandler {
 	private int last_x = 0;
 	private int last_y = 0;
 	private int platform_width = 32;
-	private int platform_height = 32;
+	private int platform_height = 8;
 	private int initial_platform_separation = 128;
 	private int generate_distance = 2056;
 	private int display_width;
 	private int difficulty;
 	private Random generator;
-	
+
 	public PlatformHandler(long seed, int max_platform_number, int max_display_width, int difficulty) {
 		int[] position;
 		int i;

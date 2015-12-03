@@ -31,12 +31,6 @@ public class Platform {
 	public int getType() {
 		return this.type;
 	}
-	public int getHeight() {
-		return this.height;
-	}
-	public int getWidth() {
-		return this.width;
-	}
 	public void update(boolean jumped_on) {
 		if (jumped_on) {
 			switch(this.type){
