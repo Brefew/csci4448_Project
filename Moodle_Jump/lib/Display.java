@@ -22,8 +22,6 @@ public class Display extends Canvas implements Runnable, Observer {
     //public static final int SCALE = 3;
     public static final String NAME = "Moodle Jump";
 
-    
-    
     private JFrame frame;
     public boolean running = false;
     
