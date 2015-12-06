@@ -1,9 +1,8 @@
 package lib;
 
 import java.util.Observable;
-import java.util.Observer;
 
-public class Player implements Observer {
+public class Player implements PlayerInterface {
 	private double[] position;
 	private double[] velocity;
 	private double    gravity;
@@ -52,11 +51,8 @@ public class Player implements Observer {
 		// Adds the current vertical velocity in pixels per frame to the y position
 		this.position[1] += this.velocity[1];
 	}
-
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
 		
 	}
-	
 }
