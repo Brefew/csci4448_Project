@@ -53,6 +53,6 @@ public class Player implements PlayerInterface {
 	}
 	@Override
 	public void update(Observable o, Object arg) {
-		
+		char response[] = (char[]) arg;
 	}
 }

@@ -10,25 +10,51 @@ import java.util.Observer;
 
 
 public class InputListener implements KeyListener, MouseListener{
-	private Key left,right;
+	private Key left, right;
 	private Mouse mouse;
 
-	public class Key extends Observable{
+	public class Key extends Observable {
 		public boolean pressed = false;
 		public char letter; 
 		public Key(char l) {
 			this.letter = l;
 		}
 		public void toggle(boolean isPressed){
+			String response[] = new String[3];
 			pressed = isPressed;
+			
+			response[0] = "k";
+			if (pressed) {
+				response[1] = "t";
+			} else {
+				response[1] = "f";
+			}
+			response[2] = Character.toString(letter);
+
+			setChanged();
+			notifyObservers(response);
 		}
-		public String name = "key";
 	}
 	
 	public class Mouse extends Observable{
-		
 		public Point point;
 		public String name = "mouse";
+		
+		public void setPoint(Point p) {
+			String response[] = new String[3];
+			point = p;
+			
+			response[0] = "m";
+			response[1] = Integer.toString(point.x);
+			response[2] = Integer.toString(point.y);
+			
+			setChanged();
+			notifyObservers(response);
+		}
+		@Override
+		public void notifyObservers() {
+			
+		}
 	}
 	
 	public InputListener(){

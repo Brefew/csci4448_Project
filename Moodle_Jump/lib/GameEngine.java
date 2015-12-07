@@ -7,7 +7,7 @@ public class GameEngine {
 	private static final int display_width  = 1280;
     private static int score;
     private static int next_highest_score;
-    private static final double gravity = -3.0;
+    private static final double gravity = -0.05;
     private static LevelGenerator level_generator;
     private static Player player;
     private static Display display;
@@ -134,7 +134,7 @@ public class GameEngine {
 				last_y = player_y;
 			}
 		}
-		
+
 		data_reader.close();
 	}
 	private static int[] getCollisions(int[][] objects, int[] object_height_and_width, int[][] player_corners) {
