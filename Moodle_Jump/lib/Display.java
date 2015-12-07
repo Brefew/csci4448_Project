@@ -67,12 +67,6 @@ public class Display extends Canvas implements Runnable, Observer {
     public void setState(String state) {
         
     }
-    public void onKeyPressed(char c) {
-        
-    }
-    public void onMousePressed(MouseEvent e) {
-        
-    }
     public void updateGame(int score, int next_highest_score, int[] player,
                             int[][] platforms, int[][] power_ups, int[][] enemies) {
         

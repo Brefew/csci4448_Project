@@ -53,7 +53,7 @@ public class GameEngine {
     	double gravity_modifier = 1.0;
     	// Initialized level generator which creates all initial objects
     	level_generator = new LevelGenerator(seed, max_platform_number, max_power_up_number, max_enemy_number, display_height, display_width, difficulty_modifier);
-        player = new Player(gravity);
+        player = new Player(gravity, display_width);
         
 		player_height = player.getPlayerHeight();
 		player_width = player.getPlayerWidth();
