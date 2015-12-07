@@ -15,12 +15,17 @@ import java.util.Observer;
 import javax.swing.JFrame;
 
 public class Display extends Canvas implements Runnable, Observer {
-    
+	private static boolean mouse_clicked = false;
     private static final long serialVersionUID = 1L;
     private static int height;
     private static int width;
+    private static int[] mouse_position;
+    private static String display_what;
+    private static MainMenu main_menu;
+    private static GameOverMenu game_over_menu;
     //public static final int SCALE = 3;
     public static final String NAME = "Moodle Jump";
+    public boolean play = false;
 
     private JFrame frame;
     public boolean running = false;
@@ -44,10 +49,15 @@ public class Display extends Canvas implements Runnable, Observer {
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        main_menu = new MainMenu(display_height, display_width);
+        game_over_menu = new GameOverMenu(display_height, display_width);
     }
-    synchronized void start() {
+    synchronized Thread start(String what) {
+    	display_what = what;
         running = true;
-        new Thread(this).start();
+        Thread ret = new Thread(this);
+        ret.start();
+        return ret;
     }
     
     synchronized void stop(){
@@ -72,8 +82,11 @@ public class Display extends Canvas implements Runnable, Observer {
     }
     @Override
     public void update(Observable o, Object arg) {
-        // TODO Auto-generated method stub
-        
+        String[] response = (String[]) arg;
+        if (response[0] == "m") {
+        	mouse_position = new int[] {Integer.parseInt(response[1]), Integer.parseInt(response[2])};
+        	mouse_clicked = true;
+        }
     }
     public void tick(){
     	tickCount++;
@@ -100,52 +113,126 @@ public class Display extends Canvas implements Runnable, Observer {
     	bs.show();
     }
     public void run() {
-        long lastTime = System.nanoTime();
-        double nsPerTick = 1000000000D/60D;
-        
-        int ticks = 0;
-        int frames = 0;
-        
-        long lastTimer = System.currentTimeMillis();
-        double delta = 0;
-    	while(running){
-    		long now = System.nanoTime();
-    		delta +=(now-lastTime)/nsPerTick;
-    		lastTime = now;
-    		boolean shouldRender = true;
-    		while(delta >= 1){
-    			ticks++;
-    			tick();
-    			delta -= 1;
-    			shouldRender = true;
-    		}
+    	if (display_what == "Game") {
+	        long lastTime = System.nanoTime();
+	        double nsPerTick = 1000000000D/60D;
+	        
+	        int ticks = 0;
+	        int frames = 0;
+	        
+	        long lastTimer = System.currentTimeMillis();
+	        double delta = 0;
+	    	while(running){
+	    		long now = System.nanoTime();
+	    		delta +=(now-lastTime)/nsPerTick;
+	    		lastTime = now;
+	    		boolean shouldRender = true;
+	    		while(delta >= 1){
+	    			ticks++;
+	    			tick();
+	    			delta -= 1;
+	    			shouldRender = true;
+	    		}
+	    		
+	    		try {
+					Thread.sleep(2);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	    		if(shouldRender){
+	    		frames++;
+	        	render();
+	    		}
+	    		
+	        	if(System.currentTimeMillis()-lastTimer>=1000){
+	        		lastTimer +=1000;
+	        		System.out.println(frames+","+ticks);
+	        		frames = 0;
+	        		ticks = 0;
+	        	}
+	            //System.out.println("test");
+	        }
+    	} else if (display_what == "Main Menu") {
+    		String[] button_names = main_menu.getButtonNames();
+    		int[][] button_positions = main_menu.getButtonPositions();
+    		int[][] button_heights_and_widths = main_menu.getButtonHeightsAndWidths();
+    		boolean[] button_shadowed = main_menu.isButtonShadowed();
     		
-    		try {
-				Thread.sleep(2);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-    		if(shouldRender){
-    		frames++;
-        	render();
+    		while(running) {
+    			if (mouse_clicked) {
+    				mouse_clicked = false;
+    				String clicked_button_name = "";
+    				
+    				for (int i=0; i<button_names.length; i++) {
+    					// Test if mouse click was on a button
+    					if (mouse_position[0] < button_positions[i][0]+button_heights_and_widths[i][1] &&
+    						mouse_position[0] > button_positions[i][0] &&
+    						mouse_position[1] < button_positions[i][1]+button_heights_and_widths[i][0] &&
+    						mouse_position[1] > button_positions[i][1]) {
+    						clicked_button_name = button_names[i];
+    						break;
+    					}
+    				}
+    				
+    				if (clicked_button_name == "") {
+    					continue;
+    				} else if (clicked_button_name == "Play") {
+    					play = true;
+    				} else if (clicked_button_name == "High Scores") {
+    					// Need to implement
+    				} else if (clicked_button_name == "Quit") {
+    					play = false;
+    				}
+    				
+    				stop();
+    			} else {
+    				try {
+    					Thread.sleep(100);
+    				} catch (InterruptedException e) {
+    					e.printStackTrace();
+    				}
+    			}
     		}
+    	} else if (display_what == "Game Over Menu") {
+    		String[] button_names = game_over_menu.getButtonNames();
+    		int[][] button_positions = game_over_menu.getButtonPositions();
+    		int[][] button_heights_and_widths = game_over_menu.getButtonHeightsAndWidths();
+    		boolean[] button_shadowed = game_over_menu.isButtonShadowed();
     		
-        	if(System.currentTimeMillis()-lastTimer>=1000){
-        		lastTimer +=1000;
-        		System.out.println(frames+","+ticks);
-        		frames = 0;
-        		ticks = 0;
-        	}
-            //System.out.println("test");
-        }
-    }
-    
-    private void displayMenu(String menu) {
-        
-    }
-    private void displayGame() {
-        
-        
+    		while(running) {
+    			if (mouse_clicked) {
+    				mouse_clicked = false;
+    				String clicked_button_name = "";
+    				
+    				for (int i=0; i<button_names.length; i++) {
+    					// Test if mouse click was on a button
+    					if (mouse_position[0] < button_positions[i][0]+button_heights_and_widths[i][1] &&
+    						mouse_position[0] > button_positions[i][0] &&
+    						mouse_position[1] < button_positions[i][1]+button_heights_and_widths[i][0] &&
+    						mouse_position[1] > button_positions[i][1]) {
+    						clicked_button_name = button_names[i];
+    						break;
+    					}
+    				}
+    				
+    				if (clicked_button_name == "") {
+    					continue;
+    				} else if (clicked_button_name == "Retry") {
+    					play = true;
+    				} else if (clicked_button_name == "Quit") {
+    					play = false;
+    				}
+    				
+    				stop();
+    			} else {
+    				try {
+    					Thread.sleep(100);
+    				} catch (InterruptedException e) {
+    					e.printStackTrace();
+    				}
+    			}
+    		}
+    	}
     }
 }

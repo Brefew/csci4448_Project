@@ -13,16 +13,24 @@ public class GameEngine {
     private static Display display;
     private static InputListener input_listener;
     private static DataReader data_reader;
+    private static Thread display_thread;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
     	input_listener = new InputListener();
     	data_reader = new DataReader();
     	display = new Display(display_height, display_width);
     	
     	input_listener.attach(display);
-        display.start();
-        // Menu will be created here as a member variable of GameEngine if we have enough time to implement it
-        startGame();
+        display_thread = display.start("Main Menu");
+        display_thread.join();
+        
+        while (display.play) {
+        	display_thread = display.start("Game");
+        	startGame();
+        	display_thread.join();
+        	display_thread = display.start("Game Over Menu");
+        	display_thread.join();
+        }
     }
 
 	private static void startGame() {
