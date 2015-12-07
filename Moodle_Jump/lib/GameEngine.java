@@ -51,9 +51,11 @@ public class GameEngine {
 		// This function should only be used here really because it moves the player from
 		//   whatever the initial position is to above the lowest of the platforms
 		player.setPosition(starting_x, starting_y);
-		while (true) {
-			// Flag for when the player does something that would kill itself
-			boolean dead = false;
+		
+		// Flag for when the player does something that would kill itself
+		boolean dead = false;
+		score = 0;
+		while (!dead) {
 			// These next three arrays hold arrays for each individual object with the format:
 			//   {x, y, type, status}
 			int[][] platforms = level_generator.getPlatforms();
@@ -62,6 +64,9 @@ public class GameEngine {
 			int[] player_position = player.getPosition();
 			int player_x = player_position[0];
 			int player_y = player_position[1];
+			if (player_y > score) {
+				score = player_y;
+			}
 			// Corners for the player
 			int[][] player_corners = {{player_x,               player_y}, {player_x+player_width,               player_y},
 				                      {player_x, player_y-player_height}, {player_x+player_width, player_y-player_height}};
@@ -117,6 +122,8 @@ public class GameEngine {
 				last_y = player_y;
 			}
 		}
+		
+		data_reader.close();
 	}
 	private int[] getCollisions(int[][] objects, int[] object_height_and_width, int[][] player_corners) {
 		int[] ret;
@@ -174,5 +181,22 @@ public class GameEngine {
 			collision = true;
 		}
 		return collision;
+	}
+	private int findNextHighestScore() {
+		int all_scores[];
+		int next_highest_score = score;
+		
+		all_scores = data_reader.getScores();
+		// Iterate backwards through the high scores because we are looking for the first lowest score
+		//   that is higher than the current score. If the current score is the highest, then
+		//   next_highest_score will just stay as the current score
+		for (int i=all_scores.length-1; i>=0; i--) {
+			if (all_scores[i] > next_highest_score) {
+				next_highest_score = all_scores[i];
+				break;
+			}
+		}
+		
+		return next_highest_score;
 	}
 }
