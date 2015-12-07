@@ -29,7 +29,7 @@ public class Display extends Canvas implements Runnable, Observer {
     
     private BufferedImage image = new BufferedImage(WIDTH,HEIGHT,BufferedImage.TYPE_INT_RGB);
     private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
-    
+
     public Display(int display_height, int display_width){
     	height = display_height;
     	width  = display_width;
@@ -44,8 +44,6 @@ public class Display extends Canvas implements Runnable, Observer {
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-        
-        
     }
     synchronized void start() {
         running = true;
@@ -55,9 +53,7 @@ public class Display extends Canvas implements Runnable, Observer {
     synchronized void stop(){
         running = false;
     }
-    
-    
-    
+
     public void setState(String state) {
         
     }
@@ -67,24 +63,18 @@ public class Display extends Canvas implements Runnable, Observer {
     public void onMousePressed(MouseEvent e) {
         
     }
-    private void displayMenu(String menu) {
+    public void updateGame(int score, int next_highest_score, int[] player,
+                            int[][] platforms, int[][] power_ups, int[][] enemies) {
         
     }
-    private void displayGame() {
-        
-        
-    }
-    private void updateGame(Player player, int score, int next_highest_score,
-                            int[] platforms, int power_ups, int[] enemies) {
-        
+    public void gameOver() {
+    	
     }
     @Override
     public void update(Observable o, Object arg) {
         // TODO Auto-generated method stub
         
     }
-    
-    
     public void tick(){
     	tickCount++;
     	
@@ -93,7 +83,7 @@ public class Display extends Canvas implements Runnable, Observer {
     		
     	}
     }
-    public void render(){
+    public void render() {
     	BufferStrategy bs = getBufferStrategy();
     	if(bs == null){
     		createBufferStrategy(3);
@@ -108,7 +98,6 @@ public class Display extends Canvas implements Runnable, Observer {
     	g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
     	g.dispose();
     	bs.show();
-    	
     }
     public void run() {
         long lastTime = System.nanoTime();
@@ -150,6 +139,13 @@ public class Display extends Canvas implements Runnable, Observer {
         	}
             //System.out.println("test");
         }
+    }
+    
+    private void displayMenu(String menu) {
+        
+    }
+    private void displayGame() {
+        
         
     }
 }

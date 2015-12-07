@@ -18,10 +18,14 @@ public class GameEngine {
     	input_listener = new InputListener();
     	data_reader = new DataReader();
     	display = new Display(display_height, display_width);
+    	
+    	input_listener.attach(display);
         display.start();
+        // Menu will be created here as a member variable of GameEngine if we have enough time to implement it
+        startGame();
     }
 
-	private void startGame() {
+	private static void startGame() {
 		int player_height, player_width, starting_x, starting_y, last_y;
 		// Height the player will start above the starting platform
 		int drop_height = 25;
@@ -42,6 +46,7 @@ public class GameEngine {
     	// Initialized level generator which creates all initial objects
     	level_generator = new LevelGenerator(seed, max_platform_number, max_power_up_number, max_enemy_number, display_height, display_width, difficulty_modifier);
         player = new Player(gravity);
+        
 		player_height = player.getPlayerHeight();
 		player_width = player.getPlayerWidth();
 		int[] starting_platform = level_generator.getPlatforms()[0];
@@ -51,7 +56,8 @@ public class GameEngine {
 		// This function should only be used here really because it moves the player from
 		//   whatever the initial position is to above the lowest of the platforms
 		player.setPosition(starting_x, starting_y);
-		
+
+        input_listener.attach(player);
 		// Flag for when the player does something that would kill itself
 		boolean dead = false;
 		score = 0;
@@ -67,6 +73,11 @@ public class GameEngine {
 			if (player_y > score) {
 				score = player_y;
 			}
+			next_highest_score = findNextHighestScore();
+			// Using the above data, update the display
+			display.updateGame(score, next_highest_score, player_position, platforms, enemies, power_ups);
+			
+			// After updating the display, update game data for next iteration
 			// Corners for the player
 			int[][] player_corners = {{player_x,               player_y}, {player_x+player_width,               player_y},
 				                      {player_x, player_y-player_height}, {player_x+player_width, player_y-player_height}};
@@ -107,12 +118,13 @@ public class GameEngine {
 				// Any other case means that the player is dead
 				} else {
 					dead = true;
+					display.updateGame(score, next_highest_score, player_position, platforms, enemies, power_ups);
 					break;
 				}
 			}
 			
 			if (dead) {
-				
+				display.gameOver();
 			} else {
 				// Updating the level generator, which updates the handlers
 				level_generator.update(player_y, c_p_indices, c_e_indices, c_p_u_indices);
@@ -125,7 +137,7 @@ public class GameEngine {
 		
 		data_reader.close();
 	}
-	private int[] getCollisions(int[][] objects, int[] object_height_and_width, int[][] player_corners) {
+	private static int[] getCollisions(int[][] objects, int[] object_height_and_width, int[][] player_corners) {
 		int[] ret;
 		Vector<Integer> collided_objects = new Vector<Integer>(0, 1);
 		int height = object_height_and_width[0];
@@ -153,7 +165,7 @@ public class GameEngine {
 
 		return ret;
 	}
-	private boolean checkForCollision(int[][] player_corners, int[][] object_corners) {
+	private static boolean checkForCollision(int[][] player_corners, int[][] object_corners) {
 		boolean player_x_within = false;
 		boolean player_y_within = false;
 		boolean collision = false;
@@ -182,21 +194,21 @@ public class GameEngine {
 		}
 		return collision;
 	}
-	private int findNextHighestScore() {
+	private static int findNextHighestScore() {
 		int all_scores[];
-		int next_highest_score = score;
+		int next_score = score;
 		
 		all_scores = data_reader.getScores();
 		// Iterate backwards through the high scores because we are looking for the first lowest score
 		//   that is higher than the current score. If the current score is the highest, then
 		//   next_highest_score will just stay as the current score
 		for (int i=all_scores.length-1; i>=0; i--) {
-			if (all_scores[i] > next_highest_score) {
-				next_highest_score = all_scores[i];
+			if (all_scores[i] > next_score) {
+				next_score = all_scores[i];
 				break;
 			}
 		}
 		
-		return next_highest_score;
+		return next_score;
 	}
 }
