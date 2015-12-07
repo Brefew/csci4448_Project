@@ -5,13 +5,14 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.event.MouseEvent;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.io.File;
+import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
-
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
 public class Display extends Canvas implements Runnable, Observer {
@@ -27,6 +28,7 @@ public class Display extends Canvas implements Runnable, Observer {
     public static final String NAME = "Moodle Jump";
     public boolean play = false;
 
+    private int player_highest_y = 0;
     private JFrame frame;
     public boolean running = false;
     
@@ -90,7 +92,26 @@ public class Display extends Canvas implements Runnable, Observer {
     		
     	}
     }
-    public void render() {
+    public void render(String[] sprite_names, int[][] sprite_positions) {
+    	boolean game = false;
+    	for (int i=0; i<sprite_names.length; i++) {
+    		if (sprite_names[i] == "Player") {
+    			game = true;
+    			if (sprite_positions[i][1] > player_highest_y) {
+    				// Used to convert world coordinates to screen coordinates.
+    				//   player_highest_y will always be converted to display_height/2.
+    				player_highest_y = sprite_positions[i][1];
+    			}
+    			break;
+    		}
+    	}
+    	
+    	if (game) {
+    		// If game is running, we need to convert the x and y coordinates all from
+    		//   world coordinates to screen coordinates
+    	} else {
+    		// If it's not, a menu is being displayed, so we don't need to convert any coordinates
+    	}
     	BufferStrategy bs = getBufferStrategy();
     	if(bs == null){
     		createBufferStrategy(3);
@@ -99,10 +120,18 @@ public class Display extends Canvas implements Runnable, Observer {
     	
     	Graphics g = bs.getDrawGraphics();
     	
-    	g.setColor(Color.BLACK);
+    	g.setColor(Color.WHITE);
     	g.fillRect(0, 0, getWidth(), getHeight());
     	
-    	g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+    	for (int i=0; i<sprite_names.length; i++) {
+    		BufferedImage image;
+    		try {
+				image = ImageIO.read(new File("./sprites/"+sprite_names[i]+".png"));
+				g.drawImage(image, sprite_positions[i][0], sprite_positions[i][1], null);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+    	}
     	g.dispose();
     	bs.show();
     }
@@ -117,11 +146,14 @@ public class Display extends Canvas implements Runnable, Observer {
 	        long lastTimer = System.currentTimeMillis();
 	        double delta = 0;
 	    	while(running){
+	    		// Temporary array initializations
+	    		String[] sprite_names = new String[0];
+	    		int[][] sprite_positions = new int[0][0];
 	    		long now = System.nanoTime();
 	    		delta +=(now-lastTime)/nsPerTick;
 	    		lastTime = now;
 	    		boolean shouldRender = true;
-	    		while(delta >= 1){
+	    		while(delta >= 1) {
 	    			ticks++;
 	    			tick();
 	    			delta -= 1;
@@ -135,8 +167,8 @@ public class Display extends Canvas implements Runnable, Observer {
 					e.printStackTrace();
 				}
 	    		if(shouldRender){
-	    		frames++;
-	        	render();
+	    			frames++;
+	    			render(sprite_names, sprite_positions);
 	    		}
 	    		
 	        	if(System.currentTimeMillis()-lastTimer>=1000){
@@ -153,6 +185,7 @@ public class Display extends Canvas implements Runnable, Observer {
     		int[][] button_heights_and_widths = main_menu.getButtonHeightsAndWidths();
     		boolean[] button_shadowed = main_menu.isButtonShadowed();
     		
+    		render(button_names, button_positions);
     		while(running) {
     			if (mouse_clicked) {
     				mouse_clicked = false;
