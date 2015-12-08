@@ -113,7 +113,7 @@ public class Display extends Canvas implements Runnable, Observer {
     		// If it's not, a menu is being displayed, so we don't need to convert any coordinates
     	}
     	BufferStrategy bs = getBufferStrategy();
-    	if(bs == null){
+    	if(bs == null) {
     		createBufferStrategy(3);
     		return;
     	}
