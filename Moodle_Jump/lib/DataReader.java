@@ -66,13 +66,12 @@ public class DataReader {
 		ArrayList<String> file_lines = new ArrayList<String>();
 		if (Files.exists(path)) {
 			file_lines = (ArrayList<String>) Files.readAllLines(path);
-			String file_lines_array[] = new String[file_lines.size()];
 			for (int i=0; i<file_lines.size(); i++) {
-				if (file_lines_array[i].contains("Scores:")) {
+				if (file_lines.get(i).contains("Scores:")) {
 					for (int j=i; j<file_lines.size(); i++, j++) {
 						String name;
 						int score;
-						String line = file_lines_array[j];
+						String line = file_lines.get(j);
 						int divider = line.indexOf(":");
 						// Check if ":" wasn't found or if it is the last character in the line
 						if (divider == -1 || divider == line.length()-1) {

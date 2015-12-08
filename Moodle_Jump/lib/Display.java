@@ -10,6 +10,9 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Observable;
 import java.util.Observer;
 import javax.imageio.ImageIO;
@@ -119,15 +122,18 @@ public class Display extends Canvas implements Runnable, Observer {
     	}
     	
     	Graphics g = bs.getDrawGraphics();
-    	
     	g.setColor(Color.WHITE);
     	g.fillRect(0, 0, getWidth(), getHeight());
-    	
     	for (int i=0; i<sprite_names.length; i++) {
     		BufferedImage image;
     		try {
-				image = ImageIO.read(new File("./sprites/"+sprite_names[i]+".png"));
+    			String file_name = "game_sprites/"+sprite_names[i]+".png";
+    			file_name = file_name.replace(' ', '_');
+    			Path path = FileSystems.getDefault().getPath(file_name);
+				image = ImageIO.read(path.toFile());
 				g.drawImage(image, sprite_positions[i][0], sprite_positions[i][1], null);
+				// Feel free to erase this System.out, it's just here to help you guys find where I can't get rendering working
+				System.out.println("Display.render(): line 135: This is where I try to draw the buttons, but they aren't drawing...");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -187,6 +193,7 @@ public class Display extends Canvas implements Runnable, Observer {
     		
     		render(button_names, button_positions);
     		while(running) {
+        		render(button_names, button_positions);
     			if (mouse_clicked) {
     				mouse_clicked = false;
     				String clicked_button_name = "";
@@ -215,7 +222,7 @@ public class Display extends Canvas implements Runnable, Observer {
     				stop();
     			} else {
     				try {
-    					Thread.sleep(100);
+    					Thread.sleep(200);
     				} catch (InterruptedException e) {
     					e.printStackTrace();
     				}
