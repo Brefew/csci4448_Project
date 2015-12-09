@@ -3,8 +3,8 @@ package lib;
 import java.util.Vector;
 
 public class GameEngine {
-	private static final int display_height = 780;
-	private static final int display_width  = 1280;
+	private static final int display_height = 640;
+	private static final int display_width  = 360;
     private static int score;
     private static int next_highest_score;
     private static final double gravity = -0.05;

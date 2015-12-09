@@ -37,13 +37,15 @@ public class Display extends Canvas implements Runnable, Observer {
     
     public int tickCount = 0;
     
-    private BufferedImage image = new BufferedImage(WIDTH,HEIGHT,BufferedImage.TYPE_INT_RGB);
-    private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
+    private BufferedImage image;
+    private int[] pixels;
 
     public Display(int display_height, int display_width){
     	height = display_height;
     	width  = display_width;
-        setPreferredSize(new Dimension(width/2,height));
+    	image = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
+    	pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
+        setPreferredSize(new Dimension(width,height));
         
         frame = new JFrame(NAME);
         frame.setLayout(new BorderLayout());
@@ -74,7 +76,9 @@ public class Display extends Canvas implements Runnable, Observer {
     }
     public void updateGame(int score, int next_highest_score, int[] player,
                             int[][] platforms, int[][] power_ups, int[][] enemies) {
-        
+        if (player[1] > player_highest_y) {
+        	player_highest_y = player[1];
+        }
     }
     public void gameOver() {
     	
@@ -89,25 +93,9 @@ public class Display extends Canvas implements Runnable, Observer {
     }
     public void tick(){
     	tickCount++;
-    	
-    	for(int i = 0; i < pixels.length; i++){
-    		pixels[i] = i*tickCount;
-    		
-    	}
     }
     public void render(String[] sprite_names, int[][] sprite_positions) {
     	boolean game = false;
-    	for (int i=0; i<sprite_names.length; i++) {
-    		if (sprite_names[i] == "Player") {
-    			game = true;
-    			if (sprite_positions[i][1] > player_highest_y) {
-    				// Used to convert world coordinates to screen coordinates.
-    				//   player_highest_y will always be converted to display_height/2.
-    				player_highest_y = sprite_positions[i][1];
-    			}
-    			break;
-    		}
-    	}
     	
     	if (game) {
     		// If game is running, we need to convert the x and y coordinates all from
@@ -120,24 +108,35 @@ public class Display extends Canvas implements Runnable, Observer {
     		createBufferStrategy(3);
     		return;
     	}
-    	
-    	Graphics g = bs.getDrawGraphics();
-    	g.setColor(Color.WHITE);
-    	g.fillRect(0, 0, getWidth(), getHeight());
+    	// This sets the background color to white
+    	for (int i=0; i<height; i++) {
+    		for (int j=0; j<width; j++) {
+    			pixels[i*width+j] = Integer.MAX_VALUE;
+    		}
+    	}
     	for (int i=0; i<sprite_names.length; i++) {
-    		BufferedImage image;
+    		BufferedImage sprite;
     		try {
+    			int sprite_x = sprite_positions[i][0];
+    			int sprite_y = convertWorldYToScreenY(sprite_positions[i][1]);
     			String file_name = "game_sprites/"+sprite_names[i]+".png";
     			file_name = file_name.replace(' ', '_');
     			Path path = FileSystems.getDefault().getPath(file_name);
-				image = ImageIO.read(path.toFile());
-				g.drawImage(image, sprite_positions[i][0], sprite_positions[i][1], null);
-				// Feel free to erase this System.out, it's just here to help you guys find where I can't get rendering working
-				System.out.println("Display.render(): line 135: This is where I try to draw the buttons, but they aren't drawing...");
+				sprite = ImageIO.read(path.toFile());
+				for (int j=0; j<sprite.getHeight(); j++) {
+					for (int k=0; k<sprite.getWidth(); k++) {
+						pixels[(sprite_y+j-sprite.getHeight())*width+(sprite_x+k)] = sprite.getRGB(k, j);
+					}
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
     	}
+
+    	Graphics g = bs.getDrawGraphics();
+    	g.setColor(Color.WHITE);
+    	g.fillRect(0, 0, getWidth(), getHeight());
+    	g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
     	g.dispose();
     	bs.show();
     }
@@ -189,7 +188,7 @@ public class Display extends Canvas implements Runnable, Observer {
     		String[] button_names = main_menu.getButtonNames();
     		int[][] button_positions = main_menu.getButtonPositions();
     		int[][] button_heights_and_widths = main_menu.getButtonHeightsAndWidths();
-    		boolean[] button_shadowed = main_menu.isButtonShadowed();
+//    		boolean[] button_shadowed = main_menu.isButtonShadowed();
     		
     		render(button_names, button_positions);
     		while(running) {
@@ -232,7 +231,7 @@ public class Display extends Canvas implements Runnable, Observer {
     		String[] button_names = game_over_menu.getButtonNames();
     		int[][] button_positions = game_over_menu.getButtonPositions();
     		int[][] button_heights_and_widths = game_over_menu.getButtonHeightsAndWidths();
-    		boolean[] button_shadowed = game_over_menu.isButtonShadowed();
+//    		boolean[] button_shadowed = game_over_menu.isButtonShadowed();
     		
     		while(running) {
     			if (mouse_clicked) {
@@ -268,5 +267,17 @@ public class Display extends Canvas implements Runnable, Observer {
     			}
     		}
     	}
+    }
+    private int convertWorldYToScreenY(int y) {
+    	int ret;
+    	
+    	// If the player's highest y is set to 0, then the game is in a menu
+    	if (player_highest_y == 0) {
+    		ret = height-1-y;
+    	} else {
+    		ret = height-1-(player_highest_y-y);
+    	}
+    	
+    	return ret;
     }
 }

@@ -6,18 +6,22 @@ public class MainMenu extends Menu {
 		int[] position = new int[2];
 		this.button_count = 3;
 		this.buttons = new Button[this.button_count];
-		this.button_starting_x = display_width-(this.button_width/2);
+		this.button_starting_x = (display_width/2)-this.button_width/2;
 		// Middle button starting y
-		button_starting_y = (display_height/this.button_height/2)*this.button_height;
+		button_starting_y = (display_height/2)-this.button_height/2;
 		
 		position[0] = this.button_starting_x;
-		position[1] = button_starting_y-(this.button_height*2);
+		position[1] = button_starting_y+(this.button_height*2);
 		buttons[0] = new Button("Play", position, this.button_height, this.button_width, true);
 		
+		position = new int[2];
+		position[0] = this.button_starting_x;
 		position[1] = button_starting_y;
 		buttons[1] = new Button("High Scores", position, this.button_height, this.button_width, true);
 		
-		position[1] = button_starting_y+(this.button_height*2);
+		position = new int[2];
+		position[0] = this.button_starting_x;
+		position[1] = button_starting_y-(this.button_height*2);
 		buttons[2] = new Button("Quit", position, this.button_height, this.button_width, true);
 	}
 	@Override

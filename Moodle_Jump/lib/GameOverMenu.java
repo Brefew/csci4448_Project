@@ -6,15 +6,15 @@ public class GameOverMenu extends Menu {
 		int[] position = new int[2];
 		this.button_count = 2;
 		this.buttons = new Button[this.button_count];
-		this.button_starting_x = display_width-(this.button_width/2);
+		this.button_starting_x = (display_width/2)-this.button_width/2;
 		// Middle button starting y
-		button_starting_y = (display_height/this.button_height/2)*this.button_height;
+		button_starting_y = (display_height/2)-this.button_height/2;
 		
 		position[0] = this.button_starting_x;
-		position[1] = button_starting_y-this.button_height;
+		position[1] = button_starting_y+this.button_height;
 		buttons[0] = new Button("Play", position, this.button_height, this.button_width, true);
 		
-		position[1] = button_starting_y+this.button_height;
+		position[1] = button_starting_y-this.button_height;
 		buttons[1] = new Button("Quit", position, this.button_height, this.button_width, true);
 	}
 	@Override
