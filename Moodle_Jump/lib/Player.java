@@ -83,20 +83,19 @@ public class Player implements PlayerInterface {
 	@Override
 	public void update(Observable o, Object arg) {
 		String response[] = (String[]) arg;
-		
 		if (response[0] == "k") {
-			if (response[1] == "t" && response[2] == "a") {
-				this.x_acceleration -= 1.0;
-				System.out.println("Woo");
-			}
-			if (response[1] == "f" && response[2] == "a") {
-				this.x_acceleration += 1.0;
-			}
-			if (response[1] == "t" && response[2] == "d") {
-				this.x_acceleration += 1.0;
-			}	
-			if (response[1] == "f" && response[2] == "d") {
-				this.x_acceleration -= 1.0;
+			if (response[1] == "t") {
+				if (response[2].contentEquals("a")) {
+					this.x_acceleration -= 1.0;
+				} else if (response[2].contentEquals("d")) {
+					this.x_acceleration += 1.0;
+				}
+			} else if (response[1] == "f") {
+				if (response[2].contentEquals("a")) {
+					this.x_acceleration += 1.0;
+				} else if (response[2].contentEquals("d")) {
+					this.x_acceleration -= 1.0;
+				}
 			}
 		}
 		if (this.x_acceleration > 1.0) {

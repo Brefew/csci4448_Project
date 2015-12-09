@@ -133,9 +133,12 @@ public class GameEngine {
 					break;
 				}
 			}
+			if (display_height/2-(score-last_y) < 0) {
+				dead = true;
+			}
 			
 			if (dead) {
-				display.gameOver();
+				display.stop();
 			} else {
 				// Updating the level generator, which updates the handlers
 				level_generator.update(player_y, c_p_indices, c_e_indices, c_p_u_indices);

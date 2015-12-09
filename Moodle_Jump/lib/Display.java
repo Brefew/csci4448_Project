@@ -235,18 +235,23 @@ public class Display extends Canvas implements Runnable, Observer {
     		int[][] button_positions = game_over_menu.getButtonPositions();
     		int[][] button_heights_and_widths = game_over_menu.getButtonHeightsAndWidths();
 //    		boolean[] button_shadowed = game_over_menu.isButtonShadowed();
+    		player_highest_y = 0;
     		
+    		render(button_names, button_positions);
     		while(!running) {
+    			render(button_names, button_positions);
+    			System.out.println("Game over");
+    			
     			if (mouse_clicked) {
     				mouse_clicked = false;
     				String clicked_button_name = "";
     				
     				for (int i=0; i<button_names.length; i++) {
     					// Test if mouse click was on a button
-    					if (mouse_position[0] < button_positions[i][0]+button_heights_and_widths[i][1] &&
-    						mouse_position[0] > button_positions[i][0] &&
-    						mouse_position[1] < button_positions[i][1]+button_heights_and_widths[i][0] &&
-    						mouse_position[1] > button_positions[i][1]) {
+    					if (mouse_position[0] < button_positions[i][0] &&
+    						mouse_position[0] > button_positions[i][0]-button_heights_and_widths[i][1] &&
+    						mouse_position[1] < button_positions[i][1] &&
+    						mouse_position[1] > button_positions[i][1]-button_heights_and_widths[i][0]) {
     						clicked_button_name = button_names[i];
     						break;
     					}

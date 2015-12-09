@@ -27,7 +27,7 @@ public class EnemyHandler {
 			for (; j<platforms.length; j++) {
 				if (platforms[j][1]-this.last_y >= this.initial_enemy_separation && platforms[j][2] == 0) {
 					position = new int[] {platforms[j][0], this.enemy_height+platforms[j][1]};
-					this.enemies[i] = new Enemy(position, 1, 1, enemy_height, enemy_width);
+					this.enemies[i] = new Enemy(position, 0, 1, enemy_height, enemy_width);
 					this.last_y = platforms[j][1];
 				}
 			}
@@ -57,7 +57,6 @@ public class EnemyHandler {
 			boolean affected = false;
 			for (; j<indices_of_affected_enemies.length; j++) {
 				if (i == indices_of_affected_enemies[j]) {
-					System.out.println("Somehow enemy index '"+i+"' has been affected");
 					affected = true;
 					break;
 				}
