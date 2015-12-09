@@ -29,9 +29,6 @@ public class Display extends Canvas implements Runnable, Observer {
     public static final String NAME = "Moodle Jump";
     public boolean play = false;
 
-    private boolean updated = false;
-    private String[] game_sprite_names = new String[0];
-    private int[][]  game_sprite_positions = new int[0][2];
     private int player_highest_y = 0;
     private JFrame frame;
     public boolean running = false;
@@ -62,7 +59,6 @@ public class Display extends Canvas implements Runnable, Observer {
     }
     synchronized Thread start(String what) {
     	display_what = what;
-        running = true;
         Thread ret = new Thread(this);
         ret.start();
         return ret;
@@ -72,9 +68,6 @@ public class Display extends Canvas implements Runnable, Observer {
         running = false;
     }
 
-    public boolean getUpdated() {
-    	return this.updated;
-    }
     public void setState(String state) {
         
     }
@@ -113,10 +106,8 @@ public class Display extends Canvas implements Runnable, Observer {
         sprite_names[j] = "player";
         sprite_positions[j][0] = player[0];
 		sprite_positions[j][1] = player[1];
-		this.updated = false;
-		this.game_sprite_names = sprite_names;
-		this.game_sprite_positions = sprite_positions;
-        this.updated = true;
+
+		this.render(sprite_names, sprite_positions);
     }
     public void gameOver() {
     	
@@ -186,20 +177,16 @@ public class Display extends Canvas implements Runnable, Observer {
     }
     public void run() {
     	if (display_what == "Game") {
+    		running = true;
 	    	while(running) {
-	    		while(!this.updated) {
-	    			try {
-						Thread.sleep(2);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-	    		}
-	    		String[] sprite_names = this.game_sprite_names;
-	    		int[][] sprite_positions = this.game_sprite_positions;
-
-	    		render(sprite_names, sprite_positions);
-	        }
+    		try {
+					Thread.sleep(10);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+    		}
     	} else if (display_what == "Main Menu") {
+    		running = true;
     		String[] button_names = main_menu.getButtonNames();
     		int[][] button_positions = main_menu.getButtonPositions();
     		int[][] button_heights_and_widths = main_menu.getButtonHeightsAndWidths();
@@ -243,12 +230,13 @@ public class Display extends Canvas implements Runnable, Observer {
     			}
     		}
     	} else if (display_what == "Game Over Menu") {
+    		running = false;
     		String[] button_names = game_over_menu.getButtonNames();
     		int[][] button_positions = game_over_menu.getButtonPositions();
     		int[][] button_heights_and_widths = game_over_menu.getButtonHeightsAndWidths();
 //    		boolean[] button_shadowed = game_over_menu.isButtonShadowed();
     		
-    		while(running) {
+    		while(!running) {
     			if (mouse_clicked) {
     				mouse_clicked = false;
     				String clicked_button_name = "";
@@ -290,7 +278,7 @@ public class Display extends Canvas implements Runnable, Observer {
     	if (player_highest_y == 0) {
     		ret = height-1-y;
     	} else {
-    		ret = height-1-(player_highest_y-y);
+    		ret = height/2+(player_highest_y-y);
     	}
     	
     	return ret;

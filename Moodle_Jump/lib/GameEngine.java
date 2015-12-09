@@ -7,7 +7,7 @@ public class GameEngine {
 	private static final int display_width  = 360;
     private static int score;
     private static int next_highest_score;
-    private static final double gravity = -0.05;
+    private static final double gravity = -1.0;
     private static LevelGenerator level_generator;
     private static Player player;
     private static Display display;
@@ -99,9 +99,9 @@ public class GameEngine {
 			int[] enemy_height_and_width    = object_heights_and_widths[2];
 			
 			// These three function calls return arrays with the index/indices of collided objects
-			int[] c_p_indices   = getCollisions(player_corners, power_up_height_and_width, power_ups);
+			int[] c_p_u_indices   = getCollisions(player_corners, power_up_height_and_width, power_ups);
 			int[] c_e_indices   = getCollisions(player_corners,    enemy_height_and_width,   enemies);
-			int[] c_p_u_indices = getCollisions(player_corners, platform_height_and_width, platforms);
+			int[] c_p_indices = getCollisions(player_corners, platform_height_and_width, platforms);
 
 			// Check if the player is traveling upwards or not at all
 			if (player_y-last_y >= 0) {

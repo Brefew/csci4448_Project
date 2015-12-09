@@ -4,7 +4,7 @@ import java.util.Observable;
 
 public class Player implements PlayerInterface {
 	private double x_acceleration = 0.0;
-	private double max_velocity = 1.0;
+	private double max_velocity = 50.0;
 	private double[] position;
 	private double[] velocity;
 	private double    gravity;
@@ -46,15 +46,24 @@ public class Player implements PlayerInterface {
 		// Set the upward velocity to 5 pixels/frame - the current gravity, which is negative, so
 		//   that when updatePlayer() is called shortly after this is called, the velocity will just be
 		//   5.
-		this.velocity[1] = 1.0;
+		this.velocity[1] = 25.0;
 	}
 	public void updatePlayer(double current_gravity) {
 		// Updates gravity which can change with power ups
 		this.gravity = current_gravity;
 		
-		if ((this.velocity[0] <= this.max_velocity-this.x_acceleration) ||
-			 this.velocity[0] >= (-1*this.max_velocity)-this.x_acceleration) {
+		if ((this.velocity[0] <= (this.max_velocity/10.0)-this.x_acceleration) ||
+			 this.velocity[0] >= (-1*this.max_velocity/10.0)-this.x_acceleration) {
 			this.velocity[0] += this.x_acceleration;
+		} else if (this.x_acceleration == 0.0 && this.velocity[0] != 0.0) {
+			if (this.velocity[0] < 0.0) {
+				this.velocity[0] += 0.1;
+			} else {
+				this.velocity[0] -= 0.1;
+			}
+			if (this.velocity[0] < 0.1 && this.velocity[0] > -0.1) {
+				this.velocity[0] = 0.0;
+			}
 		}
 		// Adds the negative acceleration due to gravity to the vertical portion of the velocity vector
 		if (this.velocity[1] >= (-1*this.max_velocity)-this.gravity) {
@@ -76,18 +85,24 @@ public class Player implements PlayerInterface {
 		String response[] = (String[]) arg;
 		
 		if (response[0] == "k") {
-			if (((response[1] == "t" && response[2] == "a") ||
-				 (response[1] == "f" && response[2] == "d")) &&
-				 (this.x_acceleration >= 0.0)) {
-				this.x_acceleration -= 0.1;
-			} else if (this.x_acceleration <= 0.0){
-				this.x_acceleration += 0.1;
+			if (response[1] == "t" && response[2] == "a") {
+				this.x_acceleration -= 1.0;
+				System.out.println("Woo");
+			}
+			if (response[1] == "f" && response[2] == "a") {
+				this.x_acceleration += 1.0;
+			}
+			if (response[1] == "t" && response[2] == "d") {
+				this.x_acceleration += 1.0;
+			}	
+			if (response[1] == "f" && response[2] == "d") {
+				this.x_acceleration -= 1.0;
 			}
 		}
-		if (this.x_acceleration > 0.1) {
-			this.x_acceleration = 0.1;
-		} else if (this.x_acceleration < -0.1) {
-			this.x_acceleration = -0.1;
+		if (this.x_acceleration > 1.0) {
+			this.x_acceleration = 1.0;
+		} else if (this.x_acceleration < -1.0) {
+			this.x_acceleration = -1.0;
 		}
 	}
 }

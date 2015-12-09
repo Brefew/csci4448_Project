@@ -20,6 +20,9 @@ public class InputListener implements KeyListener, MouseListener{
 			this.letter = l;
 		}
 		public void toggle(boolean isPressed){
+			if (pressed == isPressed) {
+				return;
+			}
 			String response[] = new String[3];
 			pressed = isPressed;
 			
@@ -59,6 +62,7 @@ public class InputListener implements KeyListener, MouseListener{
 	
 	public InputListener(Display disp){
 		disp.addMouseListener(this);
+		disp.addKeyListener(this);
 		left = new Key('a');
 		right = new Key('d');
 		mouse = new Mouse();
@@ -78,11 +82,11 @@ public class InputListener implements KeyListener, MouseListener{
 		toggleKey(e.getKeyCode(),false);
 	}
 	public void toggleKey(int keyCode, boolean isPressed){
-		if(keyCode == (KeyEvent.VK_LEFT | KeyEvent.VK_A)){
-			left.toggle(isPressed);			
+		if(keyCode == KeyEvent.VK_LEFT || keyCode == KeyEvent.VK_A) {
+			left.toggle(isPressed);
 		}
 		
-		if(keyCode == (KeyEvent.VK_RIGHT | KeyEvent.VK_D)){
+		if(keyCode == KeyEvent.VK_RIGHT || keyCode == KeyEvent.VK_D) {
 			right.toggle(isPressed);
 		}
 	}
