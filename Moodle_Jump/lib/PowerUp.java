@@ -8,7 +8,7 @@ public class PowerUp {
 	public PowerUp(int[] position, int type) {
 		this.position = new double[] {(double) position[0], (double)position[1]};
 		this.type = type;
-		this.status = 0;
+		this.status = 1;
 	}
 	
 	public int[] getPosition() {

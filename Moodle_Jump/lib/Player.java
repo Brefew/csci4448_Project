@@ -17,6 +17,9 @@ public class Player implements PlayerInterface {
 	public Player(double initial_gravity, int display_width) {
 		this.gravity = initial_gravity;
 		this.display_width = display_width;
+		this.velocity = new double[2];
+		this.velocity[0] = 0.0;
+		this.velocity[1] = 0.0;
 	}
 	public int[] getPosition() {
 		return new int[] {(int) this.position[0], (int) this.position[1]};

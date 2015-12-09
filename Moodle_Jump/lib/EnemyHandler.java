@@ -1,10 +1,9 @@
 package lib;
 
-import java.util.Queue;
 import java.util.Random;
 
 public class EnemyHandler {
-	private Queue<Enemy> enemies;
+	private Enemy[] enemies;
 	private int max_number;
 	private int last_y = 0;
 	private int enemy_width = 32;
@@ -21,25 +20,28 @@ public class EnemyHandler {
 		this.generator = new Random(seed);
 		this.max_number = max_enemy_number;
 		this.difficulty = difficulty;
+		this.enemies = new Enemy[this.max_number];
 		
 		// Generate initial enemies
 		for (i=0; i<this.max_number; i++) {
 			for (; j<platforms.length; j++) {
 				if (platforms[j][1]-this.last_y >= this.initial_enemy_separation && platforms[j][2] == 0) {
 					position = new int[] {platforms[j][0], this.enemy_height+platforms[j][1]};
-					this.enemies.add(new Enemy(position, 1, 0, enemy_height, enemy_width));
+					this.enemies[i] = new Enemy(position, 1, 1, enemy_height, enemy_width);
 					this.last_y = platforms[j][1];
 				}
 			}
 		}
 	}
 	public int[][] getEnemies() {
-		int[][] ret = new int[this.enemies.size()][4];
-		Enemy temp_array[] = (Enemy[]) this.enemies.toArray();
-		for (int i=0; i<temp_array.length; i++) {
-			int[] pos = temp_array[i].getPosition();
-			int type = temp_array[i].getType();
-			int status = temp_array[i].getStatus();
+		int[][] ret = new int[this.enemies.length][4];
+		for (int i=0; i<this.enemies.length; i++) {
+			if (this.enemies[i] == null) {
+				continue;
+			}
+			int[] pos = this.enemies[i].getPosition();
+			int type = this.enemies[i].getType();
+			int status = this.enemies[i].getStatus();
 			ret[i][0] = pos[0];
 			ret[i][1] = pos[1];
 			ret[i][2] = type;
@@ -48,28 +50,29 @@ public class EnemyHandler {
 		return ret;
 	}
 	public void updateEnemies(int player_y, int[] indices_of_affected_enemies, int[][] platforms) {
-		int i, j=0, type, status=0;
+		int i, j=0, h=0, type, status=0;
 		int[] position, type_list;
-		Enemy[] enemies = (Enemy[]) this.enemies.toArray();
-		this.enemies.clear();
-		for (i=0; i<enemies.length; i++) {
+		Enemy[] temp_enemies = this.enemies;
+		for (i=0; i<temp_enemies.length; i++) {
 			boolean affected = false;
 			for (; j<indices_of_affected_enemies.length; j++) {
 				if (i == indices_of_affected_enemies[j]) {
+					System.out.println("Somehow enemy index '"+i+"' has been affected");
 					affected = true;
 					break;
 				}
 			}
-			enemies[i].update(affected);
+			if (temp_enemies[i] == null) {
+				continue;
+			}
+			temp_enemies[i].update(affected);
 			// Don't add destroyed enemies
-			if (enemies[i].getStatus() != 0) {
-				this.enemies.add(enemies[i]);
+			if (enemies[i].getStatus() >= 0) {
+				this.enemies[h] = temp_enemies[i];
+				h++;
 			}
 		}
-		
-		if (this.enemies.size() >= this.max_number) {
-			this.enemies.remove();
-		}
+
 		if (last_y-player_y <= this.generate_distance) {
 			// This switch basically checks which multiple of the difficulty modifier the player is at.
 			//   If this.difficulty = 1000, then player_y/this.difficulty will be 0 if the player is
@@ -83,7 +86,7 @@ public class EnemyHandler {
 			}
 			j=0;
 			// Generate new enemies
-			for (i=0; i<this.max_number; i++) {
+			for (i=h; i<this.max_number; i++) {
 				for (; j<platforms.length; j++) {
 					if (platforms[j][1]-this.last_y >= this.initial_enemy_separation && platforms[j][2] == 0) {
 						type = type_list[this.generator.nextInt(type_list.length)];
@@ -93,7 +96,7 @@ public class EnemyHandler {
 							case 1: status = 2;
 						}
 						position = new int[] {platforms[j][0], this.enemy_height+platforms[j][1]};
-						this.enemies.add(new Enemy(position, type, status, enemy_height, enemy_width));
+						this.enemies[i] = new Enemy(position, type, status, enemy_height, enemy_width);
 						this.last_y = platforms[j][1];
 					}
 				}

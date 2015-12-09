@@ -16,9 +16,9 @@ public class GameEngine {
     private static Thread display_thread;
 
     public static void main(String[] args) throws InterruptedException {
-    	input_listener = new InputListener();
     	data_reader = new DataReader();
     	display = new Display(display_height, display_width);
+    	input_listener = new InputListener(display);
     	
     	input_listener.attach(display);
         display_thread = display.start("Main Menu");
@@ -31,6 +31,7 @@ public class GameEngine {
         	display_thread = display.start("Game Over Menu");
         	display_thread.join();
         }
+        System.exit(0);
     }
 
 	private static void startGame() {
@@ -43,7 +44,7 @@ public class GameEngine {
     	//   If this limit is reached, the oldest object in its respective handler will be
     	//   destroyed, and a new one will be created and added to the object handler's
     	//   queue.
-    	int max_platform_number = 20;
+    	int max_platform_number = 40;
     	int max_power_up_number = 1;
     	int max_enemy_number = 2;
     	// This modifier is the height, in pixels, a player will have to travel in order for
@@ -81,10 +82,12 @@ public class GameEngine {
 			if (player_y > score) {
 				score = player_y;
 			}
+//			System.out.println(player_y);
 			next_highest_score = findNextHighestScore();
+
 			// Using the above data, update the display
-			display.updateGame(score, next_highest_score, player_position, platforms, enemies, power_ups);
-			
+			display.updateGame(score, next_highest_score, player_position, platforms, power_ups, enemies);
+
 			// After updating the display, update game data for next iteration
 			// Corners for the player
 			int[][] player_corners = {{player_x,               player_y}, {player_x+player_width,               player_y},
@@ -124,7 +127,7 @@ public class GameEngine {
 				if ((last_y-player_y > 0) && last_y-player.getPlayerHeight() > enemy_max_y) {
 					player.jump();
 				// Any other case means that the player is dead
-				} else {
+				} else if (enemies[c_e_indices[i]][3] != 0) {
 					dead = true;
 					display.updateGame(score, next_highest_score, player_position, platforms, enemies, power_ups);
 					break;
@@ -145,7 +148,7 @@ public class GameEngine {
 
 		data_reader.close();
 	}
-	private static int[] getCollisions(int[][] objects, int[] object_height_and_width, int[][] player_corners) {
+	private static int[] getCollisions(int[][] player_corners, int[] object_height_and_width, int[][] objects) {
 		int[] ret;
 		Vector<Integer> collided_objects = new Vector<Integer>(0, 1);
 		int height = object_height_and_width[0];

@@ -34,8 +34,8 @@ public class Platform {
 	public void update(boolean jumped_on) {
 		if (jumped_on) {
 			switch(this.type){
-				// Platform of type 0 cannot be destroyed, so keep status at 0
-				case 0: this.status = 0;
+				// Platform of type 0 cannot be destroyed, so keep status at -1
+				case 0: this.status = -1;
 					break;
 				default: this.status--;
 					break;

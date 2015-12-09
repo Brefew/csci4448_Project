@@ -8,11 +8,9 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Observable;
 import java.util.Observer;
 import javax.imageio.ImageIO;
@@ -31,6 +29,9 @@ public class Display extends Canvas implements Runnable, Observer {
     public static final String NAME = "Moodle Jump";
     public boolean play = false;
 
+    private boolean updated = false;
+    private String[] game_sprite_names = new String[0];
+    private int[][]  game_sprite_positions = new int[0][2];
     private int player_highest_y = 0;
     private JFrame frame;
     public boolean running = false;
@@ -71,14 +72,51 @@ public class Display extends Canvas implements Runnable, Observer {
         running = false;
     }
 
+    public boolean getUpdated() {
+    	return this.updated;
+    }
     public void setState(String state) {
         
     }
     public void updateGame(int score, int next_highest_score, int[] player,
                             int[][] platforms, int[][] power_ups, int[][] enemies) {
+        int j=0;
         if (player[1] > player_highest_y) {
         	player_highest_y = player[1];
         }
+        String[] sprite_names = new String[1+platforms.length+power_ups.length+enemies.length];
+        int[][] sprite_positions = new int[1+platforms.length+power_ups.length+enemies.length][2];
+        for (int i=0; i<power_ups.length; i++) {
+        	if (power_ups[i][3] != 0) {
+        		sprite_names[j] = "power_up_"+power_ups[i][2];
+        		sprite_positions[j][0] = power_ups[i][0];
+        		sprite_positions[j][1] = power_ups[i][1];
+        		j++;
+        	}
+        }
+        for (int i=0; i<enemies.length; i++) {
+        	if (enemies[i][3] != 0) {
+        		sprite_names[j] = "enemy_"+enemies[i][2]+"_"+enemies[i][3];
+        		sprite_positions[j][0] = enemies[i][0];
+        		sprite_positions[j][1] = enemies[i][1];
+        		j++;
+        	}
+        }
+        for (int i=0; i<platforms.length; i++) {
+        	if (platforms[i][3] != 0) {
+        		sprite_names[j] = "platform_"+platforms[i][2]+"_"+platforms[i][3];
+        		sprite_positions[j][0] = platforms[i][0];
+        		sprite_positions[j][1] = platforms[i][1];
+        		j++;
+        	}
+        }
+        sprite_names[j] = "player";
+        sprite_positions[j][0] = player[0];
+		sprite_positions[j][1] = player[1];
+		this.updated = false;
+		this.game_sprite_names = sprite_names;
+		this.game_sprite_positions = sprite_positions;
+        this.updated = true;
     }
     public void gameOver() {
     	
@@ -115,6 +153,9 @@ public class Display extends Canvas implements Runnable, Observer {
     		}
     	}
     	for (int i=0; i<sprite_names.length; i++) {
+    		if (sprite_names[i] == null) {
+    			continue;
+    		}
     		BufferedImage sprite;
     		try {
     			int sprite_x = sprite_positions[i][0];
@@ -125,7 +166,10 @@ public class Display extends Canvas implements Runnable, Observer {
 				sprite = ImageIO.read(path.toFile());
 				for (int j=0; j<sprite.getHeight(); j++) {
 					for (int k=0; k<sprite.getWidth(); k++) {
-						pixels[(sprite_y+j-sprite.getHeight())*width+(sprite_x+k)] = sprite.getRGB(k, j);
+						int pixel_index = (sprite_y+j-sprite.getHeight())*width+(sprite_x+k);
+						if (pixel_index >=0 && pixel_index < height*width) {
+							pixels[pixel_index] = sprite.getRGB(k, j);
+						}
 					}
 				}
 			} catch (IOException e) {
@@ -142,47 +186,18 @@ public class Display extends Canvas implements Runnable, Observer {
     }
     public void run() {
     	if (display_what == "Game") {
-	        long lastTime = System.nanoTime();
-	        double nsPerTick = 1000000000D/60D;
-	        
-	        int ticks = 0;
-	        int frames = 0;
-	        
-	        long lastTimer = System.currentTimeMillis();
-	        double delta = 0;
-	    	while(running){
-	    		// Temporary array initializations
-	    		String[] sprite_names = new String[0];
-	    		int[][] sprite_positions = new int[0][0];
-	    		long now = System.nanoTime();
-	    		delta +=(now-lastTime)/nsPerTick;
-	    		lastTime = now;
-	    		boolean shouldRender = true;
-	    		while(delta >= 1) {
-	    			ticks++;
-	    			tick();
-	    			delta -= 1;
-	    			shouldRender = true;
+	    	while(running) {
+	    		while(!this.updated) {
+	    			try {
+						Thread.sleep(2);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 	    		}
-	    		
-	    		try {
-					Thread.sleep(2);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-	    		if(shouldRender){
-	    			frames++;
-	    			render(sprite_names, sprite_positions);
-	    		}
-	    		
-	        	if(System.currentTimeMillis()-lastTimer>=1000){
-	        		lastTimer +=1000;
-	        		System.out.println(frames+","+ticks);
-	        		frames = 0;
-	        		ticks = 0;
-	        	}
-	            //System.out.println("test");
+	    		String[] sprite_names = this.game_sprite_names;
+	    		int[][] sprite_positions = this.game_sprite_positions;
+
+	    		render(sprite_names, sprite_positions);
 	        }
     	} else if (display_what == "Main Menu") {
     		String[] button_names = main_menu.getButtonNames();
@@ -201,8 +216,8 @@ public class Display extends Canvas implements Runnable, Observer {
     					// Test if mouse click was on a button
     					if (mouse_position[0] < button_positions[i][0]+button_heights_and_widths[i][1] &&
     						mouse_position[0] > button_positions[i][0] &&
-    						mouse_position[1] < button_positions[i][1]+button_heights_and_widths[i][0] &&
-    						mouse_position[1] > button_positions[i][1]) {
+    						mouse_position[1] < convertWorldYToScreenY(button_positions[i][1]) &&
+    						mouse_position[1] > convertWorldYToScreenY(button_positions[i][1])-button_heights_and_widths[i][0] ) {
     						clicked_button_name = button_names[i];
     						break;
     					}

@@ -57,7 +57,8 @@ public class InputListener implements KeyListener, MouseListener{
 		}
 	}
 	
-	public InputListener(){
+	public InputListener(Display disp){
+		disp.addMouseListener(this);
 		left = new Key('a');
 		right = new Key('d');
 		mouse = new Mouse();
@@ -86,9 +87,8 @@ public class InputListener implements KeyListener, MouseListener{
 		}
 	}
 	public void mouseClicked(MouseEvent e) {
-		
 		if(e.getButton() == MouseEvent.BUTTON1){
-			mouse.point = e.getPoint();
+			mouse.setPoint(e.getPoint());
 		}
 	}
 
