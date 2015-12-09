@@ -14,6 +14,8 @@ public class GameOverMenu extends Menu {
 		position[1] = button_starting_y+this.button_height;
 		buttons[0] = new Button("Play", position, this.button_height, this.button_width, true);
 		
+		position = new int[2];
+		position[0] = this.button_starting_x;
 		position[1] = button_starting_y-this.button_height;
 		buttons[1] = new Button("Quit", position, this.button_height, this.button_width, true);
 	}

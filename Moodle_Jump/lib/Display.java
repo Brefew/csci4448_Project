@@ -240,19 +240,20 @@ public class Display extends Canvas implements Runnable, Observer {
     		render(button_names, button_positions);
     		while(!running) {
     			render(button_names, button_positions);
-    			System.out.println("Game over");
     			
     			if (mouse_clicked) {
     				mouse_clicked = false;
     				String clicked_button_name = "";
-    				
+    				System.out.println(mouse_position[0]+", "+mouse_position[1]);
     				for (int i=0; i<button_names.length; i++) {
+    					System.out.println(button_positions[i][0]+", "+button_positions[i][1]);
     					// Test if mouse click was on a button
-    					if (mouse_position[0] < button_positions[i][0] &&
-    						mouse_position[0] > button_positions[i][0]-button_heights_and_widths[i][1] &&
-    						mouse_position[1] < button_positions[i][1] &&
-    						mouse_position[1] > button_positions[i][1]-button_heights_and_widths[i][0]) {
+    					if (mouse_position[0] < button_positions[i][0]+button_heights_and_widths[i][1] &&
+        					mouse_position[0] > button_positions[i][0] &&
+    						mouse_position[1] < convertWorldYToScreenY(button_positions[i][1]) &&
+    						mouse_position[1] > convertWorldYToScreenY(button_positions[i][1])-button_heights_and_widths[i][0] ) {
     						clicked_button_name = button_names[i];
+    						running = true;
     						break;
     					}
     				}
@@ -264,8 +265,6 @@ public class Display extends Canvas implements Runnable, Observer {
     				} else if (clicked_button_name == "Quit") {
     					play = false;
     				}
-    				
-    				stop();
     			} else {
     				try {
     					Thread.sleep(100);
